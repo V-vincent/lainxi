@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body style="height: 2000px;">
+    <script>
+        /*var timer=null;
+        window.onscroll=function(){
+            clearTimeout(timer);
+            timer=setTimeout(function(){
+                console.log(document.documentElement.scrollTop);
+            },500);
+        }*/
+
+        window.onscroll=jieliu(function(){
+            console.log(document.documentElement.scrollTop);
+        },500);
+
+        function jieliu(fn,dely){
+            var timer=null;
+            return function(){
+                clearTimeout(timer);
+                timer=setTimeout(fn,dely)
+            }
+        }
+    </script>
+</body>
+</html>

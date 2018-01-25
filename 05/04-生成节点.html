@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="请输入内容" value="" id="text">
+    <input type="button" id="btn1" value="发布">
+    <!--<input type="button" id="btn2" value="神经的按钮">-->
+    <div id="box"></div>
+     <ul id="list"></ul>
+    <script>
+        var btn1=document.getElementById("btn1");
+        var text=document.getElementById("text");
+       /* var btn2=document.getElementById("btn2");*/
+        var box=document.getElementById("box");
+        var list=document.getElementById("list");
+        btn1.onclick=function () {
+            if(!text.value){
+                alert("不能为空！")
+            }
+            else  if(text.value=="伟荣是傻子"){
+                alert("你说得对！")
+            }
+            else  if(text.value=="操"){
+                alert("不能说脏话！")
+            }
+            var oLi=document.createElement("li");
+            oLi.innerHTML=text.value;
+            if(list.children.length){
+                list.insertBefore(oLi,list.children[0]);
+            }
+            else {
+                list.appendChild(oLi);
+            }
+            text.value="";
+        };
+
+
+
+        /*btn1.onclick=function () {
+            var newP = document.createElement("div");
+            newP.innerText = "傻荣就是一个猪头！";
+            //box.appendChild(newP);//加在前面
+            box.insertBefore(newP,box.children[0]);//加在后面
+        };
+        btn2.onclick=function () {
+            var newP = document.createElement("div");
+            newP.innerText = "傻荣是大番薯！";
+            box.appendChild(newP);
+        }*/
+    </script>
+</body>
+</html>

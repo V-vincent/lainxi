@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度分享</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 250px;
+            position: fixed;
+            top: 50%;
+            margin-top: -150px;
+        }
+        .box .content{
+            width: 210px;
+            height: 300px;
+            background: blue;
+            position: relative;
+            left:-210px;
+        }
+        .box .content .big{
+            writing-mode:tb-rl;
+            line-height: 210px;
+            color: #ffffff;
+            padding: 100px 0;
+        }
+        .box .content .small{
+            width: 40px;
+            height: 80px;
+            background: blue;
+            display: block;
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            margin-top:-40px;
+            writing-mode:tb-rl;
+            text-align: center;
+            line-height: 40px;
+            color: #ffffff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var content=document.querySelector(".content");
+            var timer=null;
+            function dong(speed,get) {
+                clearInterval(timer);
+                timer=setInterval(function () {
+                    if(content.offsetLeft==get){
+                        clearInterval(timer);
+                        return;
+                    }
+                    content.style.left=content.offsetLeft+speed+"px";
+                },10);
+            }
+            content.onmouseover=function () {
+                dong(5,0);
+               /* clearInterval(timer);
+                timer=setInterval(function () {
+                    if(content.offsetLeft>=0){
+                        clearInterval(timer);
+                        return;
+                    }
+                    content.style.left=content.offsetLeft+speed+"px";
+                },10);*/
+            };
+            content.onmouseout=function () {
+                dong(-5,-210);
+               /* clearInterval(timer);
+                timer=setInterval(function () {
+                    if(content.offsetLeft<=-210){
+                        clearInterval(timer);
+                        return;
+                    }
+                    content.style.left=content.offsetLeft-speed+"px";
+                },10);*/
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="content">
+            <div class="big">百度分享</div>
+            <span class="small">按钮</span>
+        </div>
+    </div>
+</body>
+</html>

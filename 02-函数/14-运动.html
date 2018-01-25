@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #049fbb;
+        }
+    </style>
+
+</head>
+<body>
+     <input type="button" value="动起来" id="btn">
+     <div class="box"></div>
+     <script>
+         var Btn=document.getElementById("btn");
+         var box=document.querySelector(".box");
+         var timer;
+         var speed=5;
+         Btn.onclick=function () {
+             clearInterval(timer);
+             timer=setInterval(function () {
+                 box.style.marginLeft=box.offsetLeft + speed +"px";
+             },100)
+         }
+     </script>
+</body>
+</html>

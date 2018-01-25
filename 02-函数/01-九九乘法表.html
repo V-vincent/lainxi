@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九九乘法表</title>
+    <style>
+    </style>
+</head>
+<body>
+     <div id="text">
+     </div>
+     <script>
+         var oText=document.getElementById("text")
+         for (var i=1;i<10;i++){
+             for (var j=1;j<=i;j++){
+                 oText.innerHTML +=i+"*"+j+"="+i*j+"&nbsp;&nbsp;&nbsp;"
+             }
+             oText.innerHTML +="<br>"
+         }
+     </script>
+</body>
+</html>

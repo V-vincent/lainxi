@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旋转木马</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul li img{
+            vertical-align: middle;
+            width: 100%;
+        }
+        .box{
+            width: 1200px;
+            height: 600px;
+            margin: 20px auto;
+            border: 1px solid red;
+            position: relative;
+        }
+        .box ul{
+            position: relative;
+            z-index: 1;
+        }
+        .box ul li{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box .ctr a:nth-child(1){
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -56px;
+        }
+        .box .ctr a:nth-child(2){
+            z-index: 2;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -56px;
+        }
+    </style>
+</head>
+<body>
+   <div class="box">
+       <ul class="inner">
+           <li><img src="images/slide4.jpg" alt=""></li>
+           <li><img src="images/slide5.jpg" alt=""></li>
+           <li><img src="images/slide7.jpg" alt=""></li>
+           <li><img src="images/slide8.jpg" alt=""></li>
+           <li><img src="images/slide9.jpg" alt=""></li>
+       </ul>
+       <div class="ctr">
+           <a href="javascript:;"><img src="images/prev.png" alt="" onclick="last()"></a>
+           <a href="javascript:;"><img src="images/next.png" alt="" onclick="next()"></a>
+       </div>
+   </div>
+   <script src="noTwo.js"></script>
+   <script>
+       var ali=$("",".box .inner li");
+       var json=[
+           {width:400,height:250,opacity:0.5,zIndex:1,left:50,top:20},  //1
+           {width:600,height:375,opacity:0.7,zIndex:2,left:0,top:70},  //2
+           {width:800,height:400,opacity:1,zIndex:3,left:250,top:100},  //3
+           {width:600,height:375,opacity:0.7,zIndex:2,left:600,top:70},  //4
+           {width:400,height:250,opacity:0.5,zIndex:1,left:750,top:20} //5
+       ];
+       //初始化
+       for (var i=0;i<json.length;i++){
+           animate(ali[i],json[i]);
+       }
+       //下一张
+       function next() {
+           //把第一张删除，放到最一个
+           json.push(json.shift());
+           for(var i=0;i<json.length;i++){
+               animate(ali[i],json[i]);
+           }
+       }
+       //上一张
+       function last() {
+           json.unshift(json.pop());
+           for(var i=0;i<json.length;i++){
+               animate(ali[i],json[i]);
+           }
+       }
+   </script>
+</body>
+</html>

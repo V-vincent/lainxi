@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 520px;
+            margin:50px auto;
+            height: 280px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .box .inner{
+            width:510px;
+            margin: 5px auto;
+            height:270px;
+            position: relative;
+            overflow: hidden;
+        }
+        .box .inner ul{
+            width: 1000%;
+            list-style: none;
+            position: relative;
+        }
+        .box .inner ul li{
+            width:10%;
+            float: left;
+        }
+        ol{
+            list-style: none;
+            position: absolute;
+            bottom:20px;
+            left: 50%;
+            margin-left: -56px;
+        }
+        ol li{
+            float: left;
+            width: 18px;
+            height: 18px;
+            background-color: #003fff;
+            margin-right: 10px;
+            color: #fff;
+            text-align: center;
+            line-height: 18px;
+            cursor: pointer;
+        }
+        ol li.cur{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="banner">
+    <div class="inner">
+        <ul>
+            <!--插html-->
+        </ul>
+    </div>
+    <div class="ctr">
+        <a href="javascript:;" id="next">下一张</a>
+        <a href="javascript:;" id="prev">上一张</a>
+    </div>
+    <!--    <ol>
+            <li class="cur">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>-->
+</div>
+<div class="box" id="banner2">
+    <div class="inner">
+        <ul>
+            <!--插html-->
+        </ul>
+    </div>
+    <div class="ctr">
+        <a href="javascript:;" id="next">下一张</a>
+        <a href="javascript:;" id="prev">上一张</a>
+    </div>
+    <!--    <ol>
+            <li class="cur">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>-->
+</div>
+</body>
+</html>
+
+<script>
+
+    //高级  中级  写一些插件 （简单，好用）
+    //初级  用别人的插件
+
+    function Banner(id,obj) {
+        //写一些属性
+        this.imgPath=obj.imgPath;
+        this.obj=obj;
+        this.banner=document.getElementById(id);
+        this.oUl=this.banner.querySelector(".inner ul");
+        this.btnNext=this.banner.querySelector("#next"); //下一张
+        this.btnPrev=this.banner.querySelector("#prev"); //下一张
+        this.ctr=this.banner.querySelector(".ctr"); //控制器盒子
+        this.key=0;
+    }
+
+    Banner.prototype={
+        //自动生成html
+        cretaHtml:function(){
+            var str="";
+            for(var i=0; i<this.imgPath.length; i++){
+                str+='<li><img src="'+this.imgPath[i]+'"></li>';
+            }
+            this.oUl.innerHTML=str; //插入图片
+        },
+        //下一张事件
+        nextEv:function(){
+            var that=this;
+            this.btnNext.onclick=function () {
+                that.next(true);
+            }
+        },
+        //上一张事件
+        prevEv:function(){
+            var that=this;
+            this.btnPrev.onclick=function () {
+                that.next(false);
+            }
+        },
+        //
+        //下一张
+        next:function(off){
+            var that=this;
+            //获取目标点
+            if(off){
+                that.key++;
+                that.key>=that.imgPath.length?that.key=0:that.key;
+            }
+            else{
+                that.key<=0?that.key=that.imgPath.length:that.key;
+                that.key--;
+            }
+            var iTarget= -that.oUl.parentNode.clientWidth * that.key;
+            that.buff(iTarget);
+
+            that.current();
+        },
+        prev:function(){
+
+        },
+        //生成小原点
+        createCurrrent:function(){
+            var oL=document.createElement("ol");//
+            this.banner.appendChild(oL);
+            for(var i=0; i<this.imgPath.length; i++){
+                var oLchi=document.createElement("li");//4次
+                oLchi.innerText=i+1;
+                oL.appendChild(oLchi);
+            }
+            oL.children[0].className="cur";
+        },
+        //小原点当前项
+        current:function(){
+            var oLBtn=this.banner.querySelectorAll("ol li");
+            for(var i=0; i<oLBtn.length; i++){
+                oLBtn[i].className="";
+            }
+            //核心代码
+            oLBtn[this.key].className="cur";
+        },
+        //点击小原点
+        evCur:function(){
+            var curBtn=this.banner.querySelectorAll("ol li");//按钮
+            var that=this;
+            for(var i=0; i<curBtn.length; i++){
+                curBtn[i].onclick=function(num){
+                    return function(){
+                        that.key=num; //核心代码
+
+                        var iTarget= -that.oUl.parentNode.clientWidth * that.key;
+                        that.buff(iTarget);
+
+                        that.current();//小原点当前项
+                    }
+                }(i)
+            }
+
+
+        },
+        //自动轮播
+        autopaly:function(){
+            clearInterval(this.banner.timer);
+            var that=this;
+            this.banner.timer=setInterval(function(){
+                that.next(true);
+            },this.obj.CarouseTime);
+        },
+        //buff
+        buff:function(iTarget){
+            clearInterval(this.banner.timer1);
+            var speed=0;
+            var that=this;
+            this.banner.timer1=setInterval(function(){
+                speed = (iTarget-that.oUl.offsetLeft) / 10;
+                speed=speed>0 ? Math.ceil(speed) : Math.floor(speed);
+
+                that.oUl.style.left=that.oUl.offsetLeft + speed + "px";
+
+                if(!speed) clearInterval(this.banner.timer1);
+            },30)
+        },
+        //绑定事件
+        bindEvent:function(){
+            this.cretaHtml();
+            this.nextEv();
+            this.prevEv();
+            this.createCurrrent();
+            this.current();
+            this.evCur();
+            if (this.obj.autoplay){
+                this.autopaly();
+            }
+        }
+    };
+
+    new Banner("banner",{
+        imgPath:["images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg"],
+        CarouseTime:3000,
+        autoplay:true
+    }).bindEvent();
+
+
+    new Banner("banner2",{
+        imgPath:["images/1.jpg","images/2.jpg","images/3.jpg","images/4.jpg"],
+        CarouseTime:1000,
+        autoplay:false
+    }).bindEvent();
+
+    //用户可认自定义  图片的个数，是否轮播，是否显示小原点,是否显示下一张和上一张
+
+</script>

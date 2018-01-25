@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隔行变色</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
+
+<script>
+    var aLi=document.getElementsByTagName("li");
+    for( var i=0;i<aLi.length;i++){
+        aLi[i].innerHTML=i;
+        if(i%2==1){
+            aLi[i].style.background="blue";
+        }
+        else {
+            aLi[i].style.background="pink";
+        }
+    }
+</script>

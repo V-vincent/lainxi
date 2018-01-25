@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //闭包的缺点就是常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。
+        //减少局部变量污染
+       function fn1(){
+            var a=1;
+            return function () {
+                alert(a);
+            }
+        }
+
+       var fn=fn1();
+        fn();
+    </script>
+</body>
+</html>

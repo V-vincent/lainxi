@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 300px;
+            height: 200px;
+            margin: 60px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .box ul{
+            position: absolute;
+        }
+        .box ul li{
+            width: 300px;
+            height: 200px;
+            display: none;
+        }
+        .box ol{
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }
+        .box ol li{
+            width: 20px;
+            height: 20px;
+            background: #ccc;
+            float: left;
+            line-height: 20px;
+            text-align:center;;
+            margin-left: 10px;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+        .box ol li.on{
+            color: #8295ff;
+            background: yellow;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var box=document.getElementById("box");
+            var oUl=document.querySelectorAll(".box ul li");
+            var oOl=document.querySelectorAll(".box ol li");
+            var num=0;
+            var timer=null;
+            auto();
+            function auto() {
+                for(var i=0;i<oOl.length;i++){
+                    oOl[i].id=i;
+                    oOl[i].onclick=function () {
+                        for(var i=0;i<oOl.length;i++){
+                            oOl[i].className="";
+                            oUl[i].style.display="none";
+                        }
+                        this.className = "on";
+                        oUl[this.id].style.display="block";
+                        num=this.id;
+                    };
+                }
+            }
+            autoPlay();
+            function autoPlay() {
+                clearInterval(timer);
+                timer=setInterval(function () {
+                    for (var i=0;i<oOl.length;i++){
+                        oOl[i].className="";
+                        oUl[i].style.display="none";
+                    }
+                    num++;
+                    if(num>=oOl.length){
+                        num=0;
+                    }
+                    oOl[num].className = "on";
+                    oUl[num].style.display="block";
+                },2000);
+                box.onmouseover=function () {
+                    clearInterval(timer);
+                }
+                box.onmouseout=function () {
+                    autoPlay();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box" id="box">
+        <ul>
+            <li style="display: block"><img src="imges/01.jpg" alt=""></li>
+            <li><img src="imges/02.jpg" alt=""></li>
+            <li><img src="imges/03.jpg" alt=""></li>
+            <li><img src="imges/04.jpg" alt=""></li>
+        </ul>
+        <ol id="list">
+            <li class="on">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ol>
+    </div>
+</body>
+</html>

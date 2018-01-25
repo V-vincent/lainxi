@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin: 50px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .box li{
+            width: 100%;
+            height: 100%;
+            background: #00c7ff;
+            font-size: 50px;
+            text-align: center;
+            line-height: 200px;
+            color: #fff;
+            position: absolute;
+            left: 300px;
+            top:0;
+        }
+        .box li:nth-child(2){
+            background: #4c94ff;
+        }
+        .box li:nth-child(3){
+            background: #4cff7f;
+        }
+        .box li:nth-child(4){
+            background: #ff8259;
+        }
+        a{
+            margin-left: 600px;
+            float: left;
+            display: block;
+            text-decoration: none;
+        }
+        a+a{
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li>学习</li>
+        <li>编程</li>
+        <li>快乐</li>
+        <li>进步</li>
+    </ul>
+    <a href="javascript:;" onclick="last()">上一个</a>
+    <a href="javascript:;" onclick="next()">下一个</a>
+    <script src="noTwo.js"></script>
+    <script>
+        var box=$(".box");
+        var aLi=$("",".box li");
+        var key=0;
+
+        //初始化
+        animate(aLi[key],{left:0});
+        //点击事件
+        //下一个
+        function next() {
+            animate(aLi[key],{left:-box.clientWidth});
+            key++;
+            key=key>=aLi.length? 0 :key;
+            aLi[key].style.left="300px";
+            animate(aLi[key],{left:0});
+        }
+        //上一个
+        function last() {
+            animate(aLi[key],{left:box.clientWidth});
+            key--;
+            key=key<=0? aLi.length-1 :key;
+            aLi[key].style.left="-300px";
+            animate(aLi[key],{left:0});
+        }
+    </script>
+</body>
+</html>

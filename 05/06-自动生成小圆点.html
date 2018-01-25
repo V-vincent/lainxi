@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图自动生成小圆点</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 544px;
+            height: 328px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .box ul{
+            position: absolute;
+        }
+        .box ol{
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+        }
+        .box ol li{
+            width: 25px;
+            height: 25px;
+            background: yellow;
+            border-radius: 50%;
+            float: left;
+        }
+        .box ol li+li{
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <ul class="inner">
+            <li><img src="images/a1.jpg" alt=""></li>
+            <li><img src="images/a2.jpg" alt=""></li>
+            <li><img src="images/a3.jpg" alt=""></li>
+            <li><img src="images/a4.jpg" alt=""></li>
+        </ul>
+        <ol>
+        </ol>
+    </div>
+    <script>
+        var box=document.getElementById("box");
+        var uLi=box.children[0].children;
+        var oLi=box.children[1];
+
+        for(var i=0;i<uLi.length;i++){
+            var newLi=document.createElement("li");
+            oLi.appendChild(newLi);
+        }
+        oLi.style.marginLeft="-"+oLi.offsetWidth/2+"px";
+
+    </script>
+</body>
+</html>

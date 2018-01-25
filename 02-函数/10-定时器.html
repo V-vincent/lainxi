@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定时器</title>
+</head>
+<body>
+    <div id="text">1</div>
+    <input type="button" id="start" value="开始">
+    <input type="button" id="end" value="结束">
+    <script>
+        var text=document.getElementById("text");
+        var start=document.getElementById("start");
+        var end=document.getElementById("end");
+        var num=0;
+        var time;
+        //开启
+        start.onclick=function () {
+            clearInterval(time);
+            time=setInterval(function () {
+                num++;
+                text.innerText=num;
+            },100)
+        };
+        //暂停
+        end.onclick=function () {
+            clearInterval(time);
+        };
+        //开启定时器
+       /*setInterval(function () {
+            alert("我会一直弹下去")
+        },1000);*/
+        /*setTimeout(function () {
+            alert("我只弹一次")
+        },3000);*/
+    </script>
+</body>
+</html>

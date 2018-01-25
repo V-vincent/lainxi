@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这里是标题</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 200px;
+            margin: 50px auto;;
+            border: 1px solid #ccc;
+        }
+        .box h3{
+            background: #eeeeee;
+            font-size: 16px;
+            font-weight: normal;
+            height: 28px;
+            line-height: 28px;
+            border: 1px solid #ccc;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+        .box .tab-box .cur{
+            background: #47cdcd;
+        }
+        .box ul{
+            padding: 0 15px;
+            display: none;
+            font-size: 14px;
+            line-height: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="tab-box">
+            <h3 class="cur">前端</h3>
+            <ul style="display: block">
+                <li>前端11121g</li>
+                <li>前端1111sd</li>
+                <li>前端111111</li>
+            </ul>
+        </div>
+        <div class="tab-box">
+            <h3>后台脚本</h3>
+            <ul>
+                <li>PHP</li>
+                <li>ASP.net</li>
+                <li>JSP</li>
+            </ul>
+        </div>
+        <div class="tab-box">
+            <h3>前端框架</h3>
+            <ul>
+                <li>框架3333e</li>
+                <li>框架33333</li>
+                <li>框架33333</li>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <div class="tab-box">
+            <h3 class="cur">前端</h3>
+            <ul style="display: block">
+                <li>前端11121g</li>
+                <li>前端1111sd</li>
+                <li>前端111111</li>
+            </ul>
+        </div>
+        <div class="tab-box">
+            <h3>后台脚本</h3>
+            <ul>
+                <li>PHP</li>
+                <li>ASP.net</li>
+                <li>JSP</li>
+            </ul>
+        </div>
+        <div class="tab-box">
+            <h3>前端框架</h3>
+            <ul>
+                <li>框架3333e</li>
+                <li>框架33333</li>
+                <li>框架33333</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var Box=document.getElementsByClassName("box");
+        for (var i=0;i<Box.length;i++){
+            tab(Box[i]);
+        }
+        function tab(content) {
+            var aH3=content.querySelectorAll(".box .tab-box h3");
+            var aUl=content.querySelectorAll(".box .tab-box ul");
+            var num=0;
+            var timer=null;
+            for(var i=0;i<aH3.length;i++){
+                aH3[i].index=i;
+                aH3[i].onclick=function () {
+                    for(var i=0;i<aH3.length;i++){
+                        aUl[i].style.display="none";
+                        aH3[i].className=""
+                    }
+                    this.className="cur";
+                    aUl[this.index].style.display="block";
+                    num=this.index;
+                };
+            }
+            autoPlay();
+            function autoPlay() {
+                clearInterval(timer);
+                timer=setInterval(function () {
+                    for(var i=0;i<aH3.length;i++){
+                        aH3[i].className="";
+                        aUl[i].style.display="none";
+                    }
+                    num++;
+                    if(num>=aH3.length){
+                        num=0;
+                    }
+                    aH3[num].className="cur";
+                    aUl[num].style.display="block";
+                },2000);
+            }
+            Box.onmouseover=function () {
+                clearInterval(timer);
+            };
+            Box.onmouseout=function () {
+                autoPlay();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邮箱</title>
+</head>
+<body>
+<input type="text" id="text">
+<input type="button" value="登录" id="btn">
+
+<script>
+    var text=document.getElementById("text");
+    var btn=document.getElementById("btn");
+    btn.onclick=function () {
+        //写一个邮箱的正侧
+        //sharong@163.com
+        //12234354@qq.com
+        // \w+  @  [a-z0-9]+  \.  [a-z]+
+        //var re=/^[0-9]{4,10}\d$/;
+        var re=/^\w+@[a-z0-9]+\.[a-z]+$/;
+        //写一个手机的正侧
+        var re1=/^1[0-9]{10}\d$/;
+        //写一个用户名的正侧
+        var re2=/^[a-zA-Z0-9_]{2,16}$/;
+        if(re2.test(text.value)){
+            alert("正确")
+        }
+        else {
+            alert("错误")
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>手机全屏滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            background: #ccc;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .wrap{
+            width: 100%;
+            height: 100%;
+        }
+        .wrap .content{
+            height: 1000%;
+            transition: all 0.5s ease-in-out;
+        }
+        .wrap .content .page{
+            height: 10%;
+            font-size: 100px;
+            text-align: center;
+            line-height: 350px;
+            color: #fff;
+            background: #74bb50;
+        }
+        .wrap .content .page:nth-child(2n){
+            background: #08babb;
+        }
+    </style>
+</head>
+<body>
+   <div class="wrap">
+       <div class="content">
+           <div class="page">学习</div>
+           <div class="page">智慧</div>
+           <div class="page">我爱</div>
+           <div class="page">编程</div>
+           <div class="page">快乐</div>
+           <div class="page">幸福</div>
+       </div>
+   </div>
+   <script>
+
+       function page(obj) {
+           var wrap=document.querySelector(obj.wrap);
+           var content=document.querySelector(obj.content);
+           var page=document.querySelectorAll(obj.page);
+           var startY,startM;
+           var key=0;
+           //按下
+           content.addEventListener("touchstart",start,false);
+           //移动
+           content.addEventListener("touchmove",move,false);
+           //松开
+           content.addEventListener("touchend",end,false);
+
+           //屏幕的高度
+           function getH() {
+               return window.innerHeight||document.documentElement.clientHeight;
+           }
+           function start(ev) {
+               startY=ev.touches["0"].clientY;
+           }
+           function move(ev) {
+               startM=ev.touches["0"].clientY;
+               content.style.transform="translateY("+(-key*getH()+startM-startY)+"px)";
+           }
+           function end() {
+               startY > startM ? key++ : key--;
+               if(key<0) key=0;
+               if(key>=page.length) key=page.length-1;
+               content.style.transform="translateY("+ -10*key +"%)";
+           }
+       }
+       page({
+           wrap:".wrap",
+           content:".content",
+           page:".page"
+       });
+   </script>
+</body>
+</html>

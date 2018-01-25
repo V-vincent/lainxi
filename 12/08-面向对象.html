@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+</head>
+<body>
+<input type="button" value="弹一闪" id="btn">
+    <script>
+        function Fn() {
+            this.btn=document.getElementById("btn");
+            this.b=33;
+            var that=this;
+            this.btn.onclick=function () {
+                that.showT();
+            }
+        }
+        Fn.prototype.showT=function () {
+            alert(this.b)
+        }
+        var obj=new  Fn();
+        console.log(obj);
+    </script>
+</body>
+</html>

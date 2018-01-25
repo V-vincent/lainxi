@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搞事情</title>
+    <link rel="stylesheet" href="css/bt01.css" id="gaoshi">
+</head>
+<body>
+    <div class="page">
+        <ul class="list">
+            <li><input type="button" value="还原" id="bt01"></li>
+            <li><input type="button" value="搞大" id="bt02"></li>
+            <li><input type="button" value="搞圆" id="bt03"></li>
+            <li><input type="button" value="搞色" id="bt04"></li>
+        </ul>
+        <div class="box"></div>
+    </div>
+    <script>
+        var bt01=document.getElementById("bt01")
+        var bt02=document.getElementById("bt02")
+        var bt03=document.getElementById("bt03")
+        var bt04=document.getElementById("bt04")
+        var gaoshi=document.getElementById("gaoshi")
+        bt01.onclick=function () {
+            gaoshi.href="css/bt01.css"
+        }
+        bt02.onclick=function () {
+            gaoshi.href="css/bt02.css"
+        }
+        bt03.onclick=function () {
+            gaoshi.href="css/bt03.css"
+        }
+        bt04.onclick=function () {
+            gaoshi.href="css/bt04.css"
+        }
+    </script>
+</body>
+</html>

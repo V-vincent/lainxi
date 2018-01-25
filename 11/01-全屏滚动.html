@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全屏滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .nav{
+            width: 960px;
+            height: 80px;
+            background: #ccc;
+            margin: auto;
+        }
+        .fixed{
+            position: fixed;
+            top: 0;
+            left: 50%;
+            margin-left: -480px;
+        }
+        .nav li{
+            float: left;
+            line-height: 80px;
+            padding: 0 50px;
+            box-sizing: border-box;
+            width: 120px;
+            cursor: pointer;
+        }
+        .nav li.cur{
+            background: #00c7ff;
+        }
+        .pages{
+            width: 960px;
+            margin: auto;
+            text-align: center;
+        }
+        .pages .item{
+            margin-top: 30px;
+        }
+        .pages .content{
+            width: 100%;
+            height: 500px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav">
+        <li class="cur">A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+    </ul>
+    <div class="pages">
+        <div class="item">
+            <h1>A</h1>
+            <div class="content"></div>
+        </div>
+        <div class="item">
+            <h1>B</h1>
+            <div class="content"></div>
+        </div>
+        <div class="item">
+            <h1>C</h1>
+            <div class="content"></div>
+        </div>
+        <div class="item">
+            <h1>D</h1>
+            <div class="content"></div>
+        </div>
+    </div>
+    <script>
+        var nav=document.querySelector(".nav");
+        var navLi=document.querySelectorAll(".nav li");
+
+        var pages=document.querySelector(".pages");
+        var pagesItem=document.querySelectorAll(".pages .item");
+
+        window.onscroll=function () {
+            var H=document.documentElement.scrollTop ||document.body.scrollTop;
+            if(H>=50){
+                nav.setAttribute("class","nav fixed");
+            }
+            else{
+                nav.setAttribute("class","nav");
+            }
+            for(var i=0;i<pagesItem.length;i++){
+                if(H>=pagesItem[i].offsetTop-160){
+                    for(var j=0;j<navLi.length;j++){
+                        navLi[j].className="";
+                    }
+                    navLi[i].className="cur";
+                }
+            }
+        };
+    </script>
+</body>
+</html>

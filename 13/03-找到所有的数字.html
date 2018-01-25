@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找到所有的数字e</title>
+</head>
+<body>
+<script>
+    var arr="1483vndklvnkdfjou290u4twne19342-mjf235";
+    var tem="";
+    for (var i=0;i<arr.length;i++){
+        if(arr[i]>=0||arr[i]<=9){
+            tem+=arr[i];
+        }
+    }
+    console.log(arr.match(/\d/g));
+    console.log(arr.match(/\d+/g))
+</script>
+</body>
+</html>

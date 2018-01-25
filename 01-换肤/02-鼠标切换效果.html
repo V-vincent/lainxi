@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标切换效果</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .box{
+            text-align: center;
+            margin: 50px auto;
+        }
+        .box ul{
+            display: inline-block;
+        }
+        .box ul li{
+            float: left;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div><img src="img/01big.jpg" alt="" id="big"></div>
+        <ul>
+            <li><img src="img/01.jpg" alt="" id="small01"></li>
+            <li><img src="img/02.jpg" alt="" id="small02"></li>
+            <li><img src="img/03.jpg" alt="" id="small03"></li>
+            <li><img src="img/04.jpg" alt="" id="small04"></li>
+            <li><img src="img/05.jpg" alt="" id="small05"></li>
+        </ul>
+    </div>
+    <script>
+        var small01=document.getElementById("small01");
+        var small02=document.getElementById("small02");
+        var small03=document.getElementById("small03");
+        var small04=document.getElementById("small04");
+        var small05=document.getElementById("small05");
+        var big=document.getElementById("big");
+        small01.onmouseover=function () {
+            big.src="img/01big.jpg"
+        };
+        small02.onmouseover=function () {
+            big.src="img/02big.jpg"
+        };
+        small03.onmouseover=function () {
+            big.src="img/03big.jpg"
+        };
+        small04.onmouseover=function () {
+            big.src="img/04big.jpg"
+        };
+        small05.onmouseover=function () {
+            big.src="img/05big.jpg"
+        };
+    </script>;
+</body>
+</html>

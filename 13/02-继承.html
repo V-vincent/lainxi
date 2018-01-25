@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>继承</title>
+</head>
+<body>
+<script>
+    var arr=new Array(1,3,5,7);
+    var arr1=new Array(1,56,5,7);
+    var arr2=[2,3,4,6,8,8];
+
+    Array.prototype.sum=function () {
+        var addSum=0;
+        for(var i=0;i<this.length;i++){
+            addSum+=this[i];
+        }
+        return addSum;
+    };
+    console.log(arr.sum());
+    console.log(arr1.sum());
+    console.log(arr2.sum());
+
+</script>
+</body>
+</html>

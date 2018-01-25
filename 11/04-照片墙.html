@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 640px;
+            margin: 50px auto;
+            font-size: 0;
+        }
+        .box li{
+            float: left;
+            width: 200px;
+            height: 150px;
+            margin-top: 20px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .box li:nth-child(3n){
+            margin-right: 0;
+        }
+        li.cur{
+            border: 1px red dashed;
+        }
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li><img src="images/5.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/5.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/2.jpg" alt=""></li>
+        <li><img src="images/1.jpg" alt=""></li>
+        <li><img src="images/5.jpg" alt=""></li>
+        <li><img src="images/5.jpg" alt=""></li>
+    </ul>
+    <script src="noTwo.js"></script>
+    <script>
+        var ali=$("",".box li");
+        //初始化
+        var pos=[];
+        var zIndex=1;
+        for(var i=0;i<ali.length;i++){
+            ali[i].index=i;
+            pos[i]={left:ali[i].offsetLeft,top:ali[i].offsetTop}
+        }
+        for(var i=0;i<ali.length;i++){
+            ali[i].style.position="absolute";
+            animate(ali[i],{left:pos[i].left,top:pos[i].top});
+        }
+        //拖拽
+        for(var i=0;i<ali.length;i++){
+            drag(ali[i]);
+        }
+        function drag(obj) {
+            obj.onmousedown=function (ev) {
+                var oEvent=ev||event;
+                var x=oEvent.clientX-obj.offsetLeft;
+                var y=oEvent.clientY-obj.offsetTop;
+                zIndex++;
+                obj.style.zIndex=zIndex;
+                document.onmousemove=function (ev) {
+                    var oEvent=ev||event;
+                    obj.style.left=oEvent.clientX-x+"px";
+                    obj.style.top=oEvent.clientY-y+"px";
+                    //不选中文字
+                    window.getSelection().empty();
+                   /* for(var i=0;i<ali.length;i++){
+                        if(obj==ali[i]) continue;
+                        ali[i].className="";
+                        if(crash(obj,ali[i])){
+                            ali[i].className="cur";
+                        }
+                    }*/
+                    for(var i=0;i<ali.length;i++){
+                        ali[i].className="";
+                    }
+                    var oNear=getNear(obj);
+                    if(oNear){
+                        oNear.className="cur";
+                    }
+                };
+                document.onmouseup=function () {
+                    document.onmousemove=null;
+                    //document.onmouseup=null;
+                    var oNear=getNear(obj);
+                    if(oNear){//交换位置
+                        oNear.className="";
+                        animate(obj,pos[oNear.index]);
+                        animate(oNear,pos[obj.index]);
+                        var tem=0;
+                        tem=obj.index;
+                        obj.index=oNear.index;
+                        oNear.index=tem;
+                    }
+                    else {//回到原来的位置
+                       animate(obj,pos[obj.index]);
+                    }
+                };
+                return false;//核心代码
+            }
+        }
+        //碰撞
+        function crash(obj1,obj2) {
+            var L1=obj1.offsetLeft+obj1.offsetWidth;
+            var R1=obj1.offsetLeft;
+            var T1=obj1.offsetTop+obj1.offsetHeight;
+            var B1=obj1.offsetTop;
+
+            var L2=obj2.offsetLeft;
+            var R2=obj2.offsetLeft+obj2.offsetWidth;
+            var T2=obj2.offsetTop;
+            var B2=obj2.offsetTop+obj2.offsetHeight;
+
+            if(L1<L2 || R1>R2 || T1<T2 ||B1>B2){
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        //勾股定理
+        function getDis(obj1,obj2) {
+            var a=obj1.offsetLeft-obj2.offsetLeft;
+            var b=obj1.offsetTop-obj2.offsetTop;
+            return Math.sqrt(a*a+b*b);
+        }
+        //如果碰到了
+        function getNear(obj) {
+            var min=999999;
+            var minIndex=-1;
+            for(var i=0;i<ali.length;i++){
+                if(obj==ali[i]) continue;
+                if(crash(obj,ali[i])){
+                    var dis=getDis(obj,ali[i]);
+                    if(min>dis){
+                        min=dis;
+                        minIndex=i;
+                    }
+                }
+            }
+            if(minIndex==-1){
+                return false;
+            }
+            else {
+                return ali[minIndex];
+            }
+        }
+
+    </script>
+</body>
+</html>

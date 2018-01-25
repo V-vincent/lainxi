@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输入qq号码</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 400px;
+            margin: 50px auto;
+        }
+        #tishi{
+            font-size: 12px;
+            color: red;
+            line-height: 30px;
+            margin-left: 130px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var btn=document.getElementById("btn");
+            var text1=document.getElementById("text1");
+            var tishi=document.getElementById("tishi");
+            btn.onclick=function () {
+                if (text1.value==""){
+                    tishi.innerHTML="您还未输入qq号！"
+                }
+                else if(isNaN(text1.value)==true){
+                    tishi.innerHTML="您输入的不是数字！"
+                }
+                else if(text1.value.charAt(0)==0){
+                    tishi.innerHTML="不能有0在前面！"
+                }
+                else if(parseInt(text1.value)!=parseFloat(text1.value)){
+                    tishi.innerHTML="不能有小数啊！"
+                }
+                else  if(text1.value.length<5||text1.value.length>10){
+                    tishi.innerHTML="输入的数字必须在5位以上、10位以内！"
+                }
+                else {
+                    alert("登录成功！")
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        请输入qq的值：<input type="text" id="text1" placeholder="请输入QQ号码">
+        <input type="button" value="登录" id="btn">
+        <p id="tishi"></p>
+        <br />
+        <br />
+        1、有没有输入<br />
+        2、输入的是不是数字<br />
+        3、不能有0在前面<br />
+        4、不能是小数<br />
+        5、输入的数字必须在5位以上、10位以内<br />
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>固定导航条</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            vertical-align: middle;
+        }
+        .main img{
+            margin-left: 168px;
+        }
+        .fixd{
+            position: fixed;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <img src="images/top.png" alt="">
+    </div>
+    <div class="nav">
+        <img src="images/nav.png" alt="">
+    </div>
+    <div class="main">
+        <img src="images/main.png" alt="">
+    </div>
+    <script src="noTwo.js"></script>
+    <script>
+        var nav=document.getElementsByClassName("nav")[0];
+        var navH=nav.offsetTop;
+        window.onscroll=function () {
+            var H=scroll().top;
+            if(H>navH){
+                nav.className="nav fixd"
+            }
+            else {
+                nav.className="nav";
+            }
+        }
+    </script>
+</body>
+</html>

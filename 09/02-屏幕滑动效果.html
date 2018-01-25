@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>屏幕滑动效果</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .box{
+            width: 100%;
+            height: 100%;
+        }
+        .box .page{
+            width: 100%;
+            height: 100%;
+            font-size: 100px;
+            font-weight: normal;
+            text-align: center;
+            line-height: 600px;
+            color: #fff;
+            border-bottom: 1px solid red;
+        }
+        .menu{
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+        .menu li{
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            border: 1px solid #fff;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+        }
+        .menu li.cur{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li class="page">学习</li>
+        <li class="page">奋斗</li>
+        <li class="page">努力</li>
+        <li class="page">力量</li>
+        <li class="page">智慧</li>
+    </ul>
+    <ol class="menu">
+        <li class="cur">学习</li>
+        <li>奋斗</li>
+        <li>努力</li>
+        <li>力量</li>
+        <li>智慧</li>
+    </ol>
+
+    <script src="noTwo.js"></script>
+    <script>
+        var uli=document.querySelectorAll(".box .page");
+        var oli=document.querySelectorAll(".menu li");
+        var speed=0,timer=null,key=0;
+        init({bgColor:["#fecdea","#cdecfe","#FF93B5","#6DCFFF","#67ffee"]});
+        //初始化
+        function init(obj) {
+            for(var i=0;i<obj.bgColor.length;i++){
+                uli[i].style.background=obj.bgColor[i];
+                //oli[i].style.background=obj.bgColor[i];
+                bindEvent(i); //绑定点击事件
+            }
+        }
+        //点击事件
+        function bindEvent(i){
+            oli[i].index=i;
+            oli[i].onclick=function () {
+                //获取目标点   动谁的值
+                var iTarget= uli[this.index].offsetTop;
+                key=this.index;
+                current();
+                //滚到哪里l
+                buff(iTarget);
+            }
+        }
+        //当前项
+        function current() {
+            for(var i=0;i<oli.length;i++){
+                oli[i].className="";
+            }
+            oli[key].className="cur";
+        }
+        //缓冲运动
+        function buff(iTarget){
+            clearInterval(timer);
+            timer=setInterval(function () {
+                var scrollTop= scroll().top; //滚动条的高度
+                speed=(iTarget-scrollTop)/10;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                scrollTo(0,scrollTop+speed);
+                if(!speed){
+                    clearInterval(timer);
+                }
+            },30)
+        }
+        //鼠标中键 滚动
+       window.onmousewheel=function (ev) {
+           var oEvent=ev||event;
+           if(oEvent.deltaY>0){
+               key=++key%5;
+           }
+           else {
+               key=--key%5
+           }
+           var iTarget=window.innerHeight * key;
+           buff(iTarget);
+           current();
+       }
+    </script>
+</body>
+</html>

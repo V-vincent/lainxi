@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json遍历</title>
+</head>
+<body>
+    <script>
+       /* var arr=[1,2,8,4,5,6];
+        console.log(arr[4]);
+        for(var i=0;i<arr.length;i++){
+            console.log(arr[i])
+        }*/
+
+       var json={width:300,height:100,top:50,left:50};
+       console.log(json.width);
+        for (var k in json){
+            console.log(k);
+            console.log(json[k])
+        }
+    </script>
+</body>
+</html>

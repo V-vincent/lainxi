@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件格式</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        span{
+           color: red;
+            display: none;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+     <input type="file" id="btn">
+     <span id="text"></span>
+
+    <script>
+        var btn=document.getElementById("btn");
+        var oSpan=document.getElementById("text");
+        btn.onchange=function () {
+            var path=this.value;
+            var offPath=path.substr(path.indexOf(".")).toLowerCase();
+            if(offPath==".jpg"||offPath==".gif"){
+                oSpan.innerHTML="你选择的文件格式正确了";
+                oSpan.style.display="block";
+            }
+            else {
+                oSpan.innerHTML="你选择的文件格式错误了，请重新选择！";
+                oSpan.style.display="block";
+            }
+        };
+        /*var path="abc.png";
+        var index=path.indexOf(".");
+        alert(path.substr(index));*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 400px;
+            margin: 100px auto;
+            border: 1px solid #000;
+            padding: 15px;
+            overflow: hidden;
+        }
+        .box textarea{
+            width: 380px;
+            height: 250px;
+            resize: none;
+            margin-top: 8px;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 22px;
+        }
+        .box button{
+            width: 40px;
+            height: 25px;
+            float: left;
+            margin-top: 5px;
+        }
+        .box .bb{
+            float: left;
+            line-height: 30px;
+            margin-left: 100px;
+            font-size: 14px;
+            color: red;
+            display: none;
+        }
+        .box li{
+            margin-top: 5px;
+            width: 400px;
+            font-size: 14px;
+            line-height: 22px;
+            border-bottom:1px dashed #ccc;
+            display: inline-block;
+        }
+        .box li a {
+            float: right;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <p>微博发布：</p>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <button id="btn">发布</button>
+        <p class="bb">输入不能为空!</p>
+        <ul id="list">
+            <li>这里是发布内容!<a href="javascript:">删除</a></li>
+        </ul>
+    </div>
+    <script>
+        var box=document.getElementById("box");
+        var text=document.getElementById("text");
+        var bb=document.querySelector(".bb");
+        var btn=document.getElementById("btn");
+        var list=document.getElementById("list");
+        var a=list.getElementsByTagName("a")[0];
+        /*list.addEventListener("click",function(e) {
+            if(e.target && e.target.nodeName === "A") {
+                var that = e.target;
+                that.parentNode.parentNode.removeChild(that.parentNode);//关键
+            }
+        });*/
+        a.onclick = function () {
+            var off=confirm("你确定删除吗？");
+            if(!off) return;
+            this.parentNode.parentNode.removeChild(this.parentNode);//关键
+        };
+            btn.onclick=function () {
+            if (!text.value) {
+                bb.style.display="block";
+                return;
+            }
+            bb.style.display="none";
+            var uLi=document.createElement("li");
+            uLi.innerHTML=text.value+'<a href="javascript:">删除</a>';
+            if(list.children.length){
+                list.insertBefore(uLi,list.children[0]);
+            }
+            else {
+                list.appendChild(uLi);
+            }
+            text.value="";
+            var removebtn=list.getElementsByTagName("a");
+            for(var i=0;i<removebtn.length;i++){
+                removebtn[i].onclick=function () {
+                    var off=confirm("你确定删除吗？");
+                    if(!off) return;
+                    list.removeChild(this.parentNode);
+                }
+            }
+           /* var a=document.createElement("a");//删除
+             a.href="javascript:";
+             a.innerText = "删除";
+             uLi.appendChild(a);
+             a.onclick = function () {
+                this.parentNode.parentNode.removeChild(this.parentNode);//关键
+            };*/
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="btn" value="弹出来一个值">
+
+    <script>
+        //1.写构造函数  里面只有属性，不写方法
+        //2.主要用于CURD   复杂的应用里面
+        function Fn1(){
+            this.btn=document.getElementById("btn");
+            this.a=22;
+            var that=this;
+            this.btn.onclick=function(){
+                that.showA()
+            }
+        }
+
+        Fn1.prototype.showA=function(){
+            alert(this.a)
+        };
+
+
+        //3.new 出来
+        var obj = new Fn1();
+        console.log(obj)
+
+    </script>
+
+</body>
+</html>

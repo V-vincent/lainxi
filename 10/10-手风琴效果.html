@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴效果</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 1200px;
+            height: 450px;
+            border: 1px #ccc solid;
+            margin: 70px auto;
+            overflow: hidden;
+        }
+        .box ul{
+            width: 1600px;
+        }
+        .box ul li{
+            width: 240px;
+            height: 450px;
+            float: left;
+            overflow: hidden;
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="noTwo.js"></script>
+    <script>
+        var box=document.querySelector(".box");
+        var li=box.children[0].children;
+        var num=0,timer=null;
+        //初始化
+        init();
+        function init() {
+            for(var i=0;i<li.length;i++){
+                li[i].index=i;
+                li[i].style.background="url(images/"+(i+1)+".jpg)";
+                li[i].onmouseover=function () {
+                    for(var i=0;i<li.length;i++){
+                        animate(li[i],{width:100})
+                    }
+                    animate(this,{width:800});
+                    num=this.index;
+                }
+            }
+        }
+        function autoPlay() {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                num++;
+                num=num>=li.length ? 0 :num;
+                for(var i=0;i<li.length;i++){
+                    animate(li[i],{width:100})
+                }
+                animate(li[num],{width:800});
+            },2000)
+        }
+        autoPlay();
+        box.onmouseover=function () {
+            clearInterval(timer);
+        };
+        box.onmouseout=function () {
+            autoPlay();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加入购物车</title>
+</head>
+<body>
+   <div class="box" id="box">
+       <h1>大番薯</h1>
+       <p>1000</p>
+       <button>加入购物车</button>
+   </div>
+   <script>
+       function Shop(data) {
+           this.data=data;
+           this.box=document.getElementById("box");
+           this.goods=this.box.children[0];
+           this.price=this.box.children[1];
+           this.btn=this.box.children[2];
+       }
+       Shop.prototype={
+           bindHtml:function () {
+               this.goods.innerHTML=this.data.goods;
+               this.price.innerHTML=this.data.price;
+               this.bindEvent();
+           },
+           bindEvent:function () {
+               this.btn.onclick=function () {
+                   alert("加入购物车成功！")
+               }
+           }
+       };
+       var data={
+           goods:"足球",
+           price:100
+       };
+       var obj=new  Shop(data);
+       obj.bindHtml();
+   </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //只有属性，没有方法
+        //this 三种情况，1.点击哪个按钮，this就是哪个按钮
+        //2.一般指向window
+        //3.如果是对象里的方法 里面的this  指向对像本身
+        //4. new  让this重新指向
+        function fn1(){
+            alert(this);
+        }
+
+
+            /*setTimeout(function(){
+                alert(this)
+            },1000)*/
+
+        var obj={
+            a:function(){
+                console.log(this)
+            }
+        }
+
+        console.log(obj.a())
+
+    </script>
+</body>
+</html>

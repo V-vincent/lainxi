@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+        
+        document.onkeydown=function (ev) {
+            if(ev.code=="ArrowUp"){
+                box.style.top=box.offsetTop-5+"px";
+            }
+            else if(ev.code=="ArrowDown"){
+                box.style.top=box.offsetTop+5+"px";
+            }
+            else if(ev.code=="ArrowLeft"){
+                box.style.left=box.offsetLeft-5+"px";
+            }
+            else if(ev.code=="ArrowRight"){
+                box.style.left=box.offsetLeft+10+"px";
+            }
+        };
+        
+    </script>
+</body>
+</html>

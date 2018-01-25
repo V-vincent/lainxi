@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟垂直滚动条</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            height: 450px;
+            border: 1px solid red;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        .box .left{
+            width: 280px;
+            float: left;
+        }
+        .box .right{
+            float: right;
+            width: 15px;
+            height: 100%;
+            background: #ccc;
+            position: relative;
+        }
+        .box .right .bar{
+            width: 100%;
+            height: 50px;
+            background: #08babb;
+            display: block;
+            cursor: pointer;
+            position: relative;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="left">
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+            <p>我爱是明学习学习我爱是明学习学习我爱是明学习学习我爱是明学习学习</p>
+        </div>
+        <div class="right">
+            <span class="bar"></span>
+        </div>
+    </div>
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+        var left=document.getElementsByClassName("left")[0];
+        var bar=document.getElementsByClassName("bar")[0];
+
+        var barH=box.offsetHeight/left.offsetHeight*box.offsetHeight;
+        bar.style.height=barH+"px";
+
+        bar.onmousedown=function (ev) {
+            var oEvent= ev || event;
+            var Y = oEvent.clientY - this.offsetTop;  //获取 一个盒子里面的坐标原点
+
+            document.onmousemove=function (ev) {
+                var oEvent= ev || event;
+                    //bar移动距离
+                var barMove= oEvent.clientY - Y;
+                bar.style.top=barMove+"px";
+
+                //3.bar 走1px  内容要走几px
+                //（内容的高度 - 大盒子的高度） / （大盒子的高度 - bar的高度）* bar移动的距离
+                var contentMove=(left.offsetHeight - box.offsetHeight) / (box.offsetHeight - bar.offsetHeight) * barMove
+                left.style.marginTop= -contentMove + "px";
+
+                if(bar.offsetTop<=0){
+                    bar.style.top=0+"px";
+                    left.style.marginTop=0+"px";
+                }
+                else if(bar.offsetTop>=box.offsetHeight-bar.offsetHeight){
+                    bar.style.top=box.offsetHeight-bar.offsetHeight+"px";
+                    left.style.marginTop=-left.offsetHeight+box.offsetHeight+"px";
+                }
+
+                //不选 中文字
+                window.getSelection().empty();
+            };
+
+            document.onmouseup=function () {
+                document.onmousemove=null;
+            }
+        };
+    </script>
+</body>
+</html>

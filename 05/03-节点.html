@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        var ul=document.querySelector("ul");
+        var ulfirst=ul.firstElementChild||ul.firstChild;
+        var ulnextsb=ulfirst.nextElementSibling||ulfirst.nextSibling;
+        var ulnextsb2=ulnextsb.nextElementSibling||ulnextsb.nextSibling;
+        var ullast=ul.lastElementChild||ul.lastChild;
+        ulfirst.style.background="red";
+        ulnextsb.style.background="pink";
+        ulnextsb2.style.background="black";
+        ullast.style.background="yellow";
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>加入购物车</title>
+</head>
+<body>
+   <div class="box" id="box">
+   </div>
+   <script>
+       function Shop(data) {
+           this.data=data;
+           this.box=document.getElementById("box");
+           this.btn=this.box.getElementsByTagName("button");
+       }
+       Shop.prototype={
+           //生成html
+           createHtml:function () {
+               var str="";
+               for(var i=0;i<data.length;i++){
+                   str+=this.bindHtml(data[i]);
+               }
+               this.box.innerHTML=str;
+           },
+           //绑定html
+           bindHtml:function (obj) {
+               var str='<h1>'+obj.goods+'</h1>'+
+                       '<p>'+obj.price+'</p>'+
+                       '<button>加入购物车</button>';
+               return str;
+           },
+           //加入购物车
+           addCart:function(){
+               for (var i=0;i<this.btn.length;i++){
+                   this.btn[i].onclick=function () {
+                       alert("加入成功")
+                   }
+               }
+           },
+           //绑定事件  所有事件都在这里调用
+           bindEvent:function () {
+               obj.createHtml(); //生成html
+               obj.addCart();
+           }
+       };
+       //模拟假的数据，这样不用等后台接口
+       var data=[
+           {goods:"大番薯",price:100},
+           {goods:"小番薯",price:50},
+           {goods:"学习机",price:1000},
+           {goods:"BB鸡",price:300}
+       ];
+       var obj=new  Shop(data);
+       obj.bindEvent();
+   </script>
+</body>
+</html>

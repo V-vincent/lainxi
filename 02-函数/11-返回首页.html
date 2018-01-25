@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回首页</title>
+</head>
+<body>
+    <div>
+        <h3>作死成功</h3>
+        <div><span id="text">4</span>秒后返回首页</div>
+    </div>
+    <script>
+        var text=document.getElementById("text");
+        var num=4;
+        setInterval(function () {
+            text.innerText=num--;
+            if(num<=0){
+                window.location.assign("https://www.baidu.com/")
+            }
+        },1000)
+    </script>
+</body>
+</html>

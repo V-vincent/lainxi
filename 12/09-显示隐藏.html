@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            background: #00c7ff;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="显示" id="btn1">
+<!--<input type="button" value="隐藏" id="btn2">-->
+<div class="box" id="box"></div>
+<script>
+    function ShowToggle() {
+        this.btn1=document.getElementById("btn1");
+        this.box=document.getElementById("box");
+    }
+    ShowToggle.prototype={
+        showX:function () {
+            var that=this;
+            this.btn1.onclick=function () {
+                if(that.box.style.display=="block"){
+                    that.box.style.display="none";
+                    that.btn1.value="显示";
+                }
+                else {
+                    that.box.style.display="block";
+                    that.btn1.value="隐藏";
+                }
+            }
+        }
+    };
+    var obj=new ShowToggle();
+    obj.showX();
+   /* function Fn1() {
+        this.btn1=document.getElementById("btn1");
+        this.btn2=document.getElementById("btn2");
+        this.box=document.getElementById("box");
+        var that=this;
+        this.btn1.onclick=function () {
+            that.show();
+        };
+        this.btn2.onclick=function () {
+            that.hide();
+        }
+    }
+    Fn1.prototype.show=function () {
+        this.box.style.display="block";
+    };
+    Fn1.prototype.hide=function () {
+        this.box.style.display="none"
+    };
+    var obj=new Fn1();
+    obj();*/
+</script>
+</body>
+</html>

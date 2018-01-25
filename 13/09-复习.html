@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //继承
+    var arr1=[1,2,6,8,9];
+    Array.prototype.sum=function () {
+        var sumA=0;
+        for (var i=0;i<this.length;i++){
+            sumA+=this[i];
+        }
+        return sumA;
+    };
+    //console.log(arr1.sum())
+    var arr2="fdnfj3409gfgn2290d3knk5l3l4j0kdfjk32u94j90jjw02jlj";
+    var tem="";
+    for(var i=0;i<arr2.length;i++){
+        if(arr2[i]>=0||arr2[i]<=9){
+            tem+=arr2[i];
+        }
+    }
+    //console.log(arr2.match(/\d/g));
+    //console.log(arr2.match(/\d+/g))
+    var str1="你是不是傻，是不是傻逼？";
+    var re1=/傻|逼/g;
+    //console.log(str1.replace(re1,"$"));
+    var str2="abc adc eedc afbc afrc";
+    var re2=/a[bsdr]c/g;
+    console.log(str2.match(re2));
+</script>
+</body>
+</html>

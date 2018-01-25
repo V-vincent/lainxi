@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            cursor: move;
+            position: relative;
+            left: 50%;
+            top:50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+        //按下去
+        box.onmousedown=function (ev) {
+            var oEvent=ev || event;
+            var x = oEvent.clientX - this.offsetLeft;
+            var y = oEvent.clientY - this.offsetTop;
+
+            //移动
+            document.onmousemove=function (ev) {
+                var oEvent=ev||event;
+                box.style.left=oEvent.clientX-x+"px";
+                box.style.top=oEvent.clientY-y+"px";
+                console.log(oEvent.clientX)
+            };
+            //松开
+            document.onmouseup=function(){
+                document.onmousemove=null;
+            }
+        }
+    </script>
+</body>
+</html>

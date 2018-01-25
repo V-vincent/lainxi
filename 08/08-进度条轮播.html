@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 800px;
+            margin: 200px auto;
+            overflow: hidden;
+        }
+        .box li{
+            width: 150px;
+            height: 5px;
+            background: #ccc;
+            margin-left: 30px;
+            float: left;
+            position: relative;
+        }
+        .box li span{
+            display: block;
+            height: 100%;
+            background: red;
+            width: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <ul class="box">
+        <li><span></span></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        var box=document.querySelector(".box");
+        var aLi=document.querySelectorAll(".box li");
+        var key=0,timer=null;
+        init();
+        createSpan();
+
+        //初始化
+        function init() {
+            var oSpan=document.createElement("span");
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].innerHTML="";//其他的兄弟清除
+            }
+            aLi[key].appendChild(oSpan);
+            linearSpan(oSpan);//span匀速运动
+        }
+        //创建span
+        function createSpan() {
+            //当前这个li创建span 其他的兄弟清除
+            setInterval(function () {
+                key=++key%4;
+                init();
+            },3000)
+        }
+        //span匀速运动\
+        function linearSpan(oSpan) {
+            timer=setInterval(function () {
+              oSpan.style.width=oSpan.offsetWidth+2+"px";
+                //到位置了
+                //关闭定时器
+                //执行下一张
+            },30)
+        }
+        //执行下一张
+    </script>
+</body>
+</html>

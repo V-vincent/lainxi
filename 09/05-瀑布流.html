@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+        .box >ul{
+            width: calc(25% - 30px);
+            float: left;
+            box-sizing: border-box;
+        }
+        .box ul+ul{
+            margin-left: 40px;
+        }
+        .box > ul > li.h100{
+            height: 100px;
+            background: #08babb;
+        }
+        .box > ul > li.h180{
+            height: 180px;
+            background: #44a779;
+        }
+        .box > ul > li.h300{
+            height: 300px;
+            background: #1cbb40;
+        }
+        .box > ul > li.h50{
+            height: 50px;
+            background: #3253bb;
+        }
+        .box ul li+li{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+    </div>
+    <script src="noTwo.js"></script>
+    <script>
+        //创建Li
+        function appendLi() {
+            var aUl=document.querySelectorAll(".box>ul");
+            var arrClass=["h180","h100","h300","h50"];
+            var ul_1=aUl[0].offsetHeight;
+            var ul_2=aUl[1].offsetHeight;
+            var ul_3=aUl[2].offsetHeight;
+            var ul_4=aUl[3].offsetHeight;
+
+            var minUlHeight=Math.min(ul_1,ul_2,ul_3,ul_4);//高度最小的Ul
+            var minUl;//在高度最小的Ul里加li
+            for(var i=0;i<aUl.length;i++){
+                if(aUl[i].offsetHeight==minUlHeight){
+                    minUl=aUl[i]
+                }
+                var aLi=document.createElement("li");
+                aLi.className=arrClass[randomClass()];
+            }
+            minUl.appendChild(aLi);//在Ul里加li
+        }
+        //获取随机数
+        function randomClass() {
+            return Math.floor(Math.random()*4);//Math.random()：0-1
+        }
+        //一直创建
+        for(var i=0;i<20;i++){
+            appendLi();
+        }
+        //鼠标滚动
+        window.onscroll=function () {
+            //文档的高度-屏幕的高度
+            var a=document.documentElement.offsetHeight-document.documentElement.clientHeight;//document:文档，文件
+            var b=document.body.scrollTop||document.documentElement.scrollTop;
+            if(a==b){
+                scrollTo(0,a-100);//滚动条往回弹100
+                appendLi();
+            }
+        }
+    </script>
+</body>
+</html>

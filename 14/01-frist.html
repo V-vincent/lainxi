@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="显示" id="btn">
+<script src="ajax.js"></script>
+<script>
+    var btn=document.getElementById("btn");
+    btn.onclick=function () {
+        ajax("01.txt?="+new Date().getTime(),function (str) {
+            alert(str);
+        });
+    };
+</script>
+</body>
+</html>

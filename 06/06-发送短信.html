@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <input type="text">
+      <input type="button" value="发送短信" id="btn">
+      <script>
+          var btn=document.getElementById("btn");
+          var timer=null;
+          btn.onclick=function () {
+              clearInterval(timer);
+              var s=5;
+              timer=setInterval(function () {
+                  btn.value=s+"秒后可重新发送";
+                  s--;
+                  if(s<0){
+                      btn.value="重新发送";
+                      btn.disabled=false;
+                      return;
+                  }
+                  btn.disabled=true;
+              },1000)
+          }
+      </script>
+</body>
+</html>

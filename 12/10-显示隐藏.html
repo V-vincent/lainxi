@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="btn" value="显示">
+<div id="box">464131211</div>
+
+
+
+<script>
+    function ShowToggle(){
+        this.btn=document.getElementById("btn");
+        this.box=document.getElementById("box");
+    }
+
+    ShowToggle.prototype={
+        //显示 隐藏
+        showDiv:function(){
+            var that=this;
+            this.btn.onclick=function(){
+                if (that.box.style.display == "block"){
+                    that.box.style.display="none";
+                    that.btn.value="显示";
+                }
+                else{
+                    that.box.style.display="block";
+                    that.btn.value="隐藏";
+                }
+            }
+        },
+        b:function(){}
+    };
+
+    /*ShowToggle.prototype.b=function(){};
+    ShowToggle.prototype.c=function(){};*/
+
+
+    var obj = new ShowToggle();
+    obj.showDiv();
+    console.log(obj)
+</script>
+
+</body>
+</html>

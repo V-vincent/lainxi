@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function cart(sex11){
+
+            var obj={}; //原料
+
+            obj.name="小明"; //属性
+            obj.sex=sex11;
+
+            obj.shwo=function(){
+                alert(obj.sex)
+            };
+            return obj;  //出厂
+        }
+
+        var obj=cart("女");
+        obj.shwo();
+
+        var obj1=cart("bbbb");
+        obj1.shwo();
+    </script>
+</body>
+</html>

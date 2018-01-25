@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="box" id="box">
+        <input type="button" value="setAttribute">
+        <input type="button" value="getAttribute">
+        <input type="button" value="removeAttribute">
+        <div class="box"></div>
+    </div>
+    <script>
+        var all=document.getElementById("box");
+        var btn=all.children;
+        btn[0].onclick=function () {
+            btn[3].setAttribute("name","西区");
+        };
+        btn[1].onclick=function () {
+            alert(btn[3].getAttribute("name"));
+        };
+        btn[2].onclick=function () {
+            btn[3].removeAttribute("class");
+        };
+
+    </script>
+</body>
+</html>

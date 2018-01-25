@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function myajax(url,success,failed) {
+        //创建ajax对象
+        var oAjax=null;
+        if(window.XMLHttpRequest){
+            oAjax=new XMLHttpRequest();
+        }
+        else {
+            oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        //连接服务器
+        oAjax.open('GET',url,true);
+        //发送请求
+        oAjax.send();
+        //响应
+        oAjax.onreadystatechange=function () {
+            if(oAjax.readyState==4){  //完成
+                if(oAjax.status==200 ){
+                    success(oAjax.responseText);
+                }
+                else {
+                    if(failed) failed(oAjax.status);
+                }
+            }
+        }
+    }
+    myajax("01.txt",function (str) {
+        console.log(str)
+    })
+</script>
+</body>
+</html>

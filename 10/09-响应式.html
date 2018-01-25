@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>响应式</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            position: relative;
+            width: 100%;
+        }
+        ul li{
+            width: 12.5%;
+            height: 200px;
+            background: pink;
+            float: left;
+            margin-top: 10px;
+        }
+        ul li:nth-child(2n){
+            background: #FF8498;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script src="noTwo.js"></script>
+    <script>
+        var aLi=$("","ul li");
+        var pos=[];
+        for(var i=0;i<aLi.length;i++){
+            pos[i]={left:aLi[i].offsetLeft,top:aLi[i].offsetTop}
+        }
+
+        function widthF() {
+            for(var i=0;i<aLi.length;i++ ){
+                aLi[i].style.position="absolute";
+                animate(aLi[i],{left:pos[i].left,top:pos[i].top})
+            }
+        }
+        function fun(per) {
+            for(var i=0;i<aLi.length;i++ ){
+                aLi[i].style.position="static";
+                aLi[i].style.width=per;
+                pos[i]={left:aLi[i].offsetLeft,top:aLi[i].offsetTop}
+            }
+        }
+        widthF();
+        window.onresize=function () {
+            var W=document.body.clientWidth;
+            if(W<=400){
+                fun("50%")
+            }
+            else if(W<=600){
+                fun("33.3333%");
+            }
+            else if(W<=800){
+                fun("25%");
+            }
+            else if(W<=1000){
+                fun("20%");
+            }
+            else {
+                fun("12.5%")
+            }
+            widthF();
+        }
+    </script>
+</body>
+</html>

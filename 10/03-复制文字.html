@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复制文字</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            width: 400px;
+            margin: 100px auto;
+        }
+        .box{
+            width: 200px;
+            min-height: 100px;
+            background: #00c7ff;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <p>我爱编程，编程使我快乐我爱编程，编程是我快乐我爱编程，编程是我快乐我爱编程，编程是我快乐
+        是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐
+        是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐
+        是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐
+        是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐是我快乐我爱编程，编程是我快乐
+    </p>
+    <div class="box"></div>
+
+    <script>
+        var p=document.getElementsByTagName("p")[0];
+        var box=document.getElementsByClassName("box")[0];
+        //松开鼠标
+        p.onmouseup=function (ev) {
+            var oEvent=ev||event;
+            var x=oEvent.clientX;
+            var y=oEvent.clientY;
+            //获取文字
+            if(window.getSelection){
+                text=window.getSelection().toString();
+            }
+            else {
+                text=document.selection.createRange().text;
+            }
+            if (text){
+                show(x,y,text);
+            }
+        };
+        //显示div
+        function show(x,y,text) {
+            box.style.display="block";
+            box.style.left=x+"px";
+            box.style.top=y+"px";
+            box.innerHTML=text;
+        }
+        //隐藏div
+        document.onmousedown=function (ev) {
+            var oEvent=ev||event;
+            oEvent.cancelable=true;
+            box.style.display="none"
+        }
+    </script>
+</body>
+</html>

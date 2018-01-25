@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>复习定时器</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 300px;
+            margin: 50px auto;
+        }
+        .box .small{
+            width: 100px;
+            height: 100px;
+            background: #049fbb;
+            position: relative;
+        }
+        .box .small .big{
+            width: 200px;
+            height: 300px;
+            background: #049fbb;
+            position: absolute;
+            left: 110px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="small">
+            <div class="big"></div>
+        </div>
+    </div>
+    <script>
+        var box=document.querySelector(".box");
+        var small=document.querySelector(".small");
+        var big=document.querySelector(".big");
+        var timer=null;
+        box.onmouseover=function () {
+            big.style.display="block";
+            clearInterval(timer);
+        };
+        box.onmouseout=function () {
+            clearInterval(timer);
+            timer=setTimeout(function () {
+                big.style.display="none"
+            },2000);
+        }
+    </script>
+</body>
+</html>

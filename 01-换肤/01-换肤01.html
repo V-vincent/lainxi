@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>换肤</title>
+    <link rel="stylesheet" href="css/yuan.css" id="pifu">
+</head>
+<body>
+    <div class="page">
+        <div class="button">
+            <input type="button" value="变宽" id="btk">
+            <input type="button" value="变高" id="btg">
+            <input type="button" value="变色" id="bts">
+            <input type="button" value="还原" id="bty">
+        </div>
+        <div class="box"></div>
+    </div>
+    <script>
+        var btk=document.getElementById("btk")
+        var btg=document.getElementById("btg")
+        var bts=document.getElementById("bts")
+        var bty=document.getElementById("bty")
+
+        var pifu=document.getElementById("pifu")
+
+        btk.onclick=function () {
+            pifu.href="css/kuan.css";
+        };
+        btg.onclick=function () {
+            pifu.href="css/gao.css";
+        };
+        bts.onclick=function () {
+            pifu.href="css/se.css";
+        };
+        bty.onclick=function () {
+            pifu.href="css/yuan.css";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="oUl">
+    <li>
+        <span>书名：我爱学习</span>
+        <span>价格：99</span>
+        <span>作者：帅</span>
+    </li>
+</ul>
+<a href="javascript:;">第一页</a>
+<a href="javascript:;">第二页</a>
+<a href="javascript:;">第三页</a>
+<script src="ajax.js"></script>
+<script>
+    var btn=document.getElementsByTagName("a");
+    var oUl=document.getElementById("oUl");
+    for(var i=0;i<btn.length;i++){
+        btn[i].index=i;
+        btn[i].onclick=function () {
+            var that=this;
+            oUl.innerHTML="";
+            ajax("book.json",function (str) {
+                var arr=JSON.parse(str).slice(that.index*3,that.index*3+3);
+                //console.log(arr[0].name);
+                for(var i=0;i<arr.length;i++){
+                   var oLi=document.createElement("li");
+                    oLi.innerHTML='<span>书名：'+arr[i].name+'</span> ' +
+                            '<span>价格'+arr[i].price+'</span>' +
+                            ' <span>作者：'+arr[i].author+'</span>';
+                    oUl.appendChild(oLi);
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

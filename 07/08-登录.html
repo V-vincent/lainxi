@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 1200px;
+            height: 700px;
+            background: #08babb;
+            margin: 20px auto;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .box .btn{
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .box .page{
+            width: 400px;
+            height: 450px;
+            background: #fff;
+            margin: 50px auto;
+            display: none;
+        }
+        .box .page >div{
+            width: 100%;
+            height: 50px;
+            background: #ccc;
+            text-align: right;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .box .page .btn01{
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <a href="javascript:;" class="btn">登录/注册</a>
+        <div class="page">
+            <div><a href="javascript:;"  class="btn01">退出</a></div>
+        </div>
+    </div>
+    <script>
+        var btn=document.getElementsByClassName("btn")[0];
+        var page=document.getElementsByClassName("page")[0];
+        var btn01=document.getElementsByClassName("btn01")[0];
+
+        btn.onclick=function () {
+            page.style.display="block";
+        };
+        btn01.onclick=function () {
+            page.style.display="none";
+        };
+    </script>
+</body>
+</html>

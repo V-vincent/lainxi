@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缓动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            margin-top: 30px;
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="启动" id="btn">
+    <input type="button" value="回来" id="btn1">
+    <div class="box" id="box"></div>
+    <script>
+        var btn=document.getElementById("btn");
+        var btn1=document.getElementById("btn1");
+        var box=document.getElementById("box");
+        var timer=null,speed=5,iTarget=500;
+
+        btn.onclick=function () {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                speed=(iTarget-box.offsetLeft)/10;
+                box.style.left=box.offsetLeft+speed+"px";
+            },30)
+        };
+        btn1.onclick=function () {
+            speed=0;
+            clearInterval(timer);
+            timer=setInterval(function () {
+                speed=(box.offsetLeft)/10;
+                box.style.left=box.offsetLeft-speed+"px";
+            },30)
+        }
+    </script>
+</body>
+</html>

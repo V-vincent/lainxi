@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解构，数组、对像、函数</title>
+</head>
+<body>
+<script>
+    //数组
+    var arr=[1,2,3];
+    var arr1=[4,4,5,...arr];  //合并数组
+    //console.log(...arr1)
+    let [a,b,c]=arr;
+
+    //对像
+    function obj() {
+        return {name:"小明",sex:"男",amour:"女"}
+    }
+    let {name:a1,sex:b1,amour:c1}=obj();
+    //console.log(a1,b1,c1);
+
+    //字符串的解构赋值
+    let ab="牛奶";
+    let bi="豹子";
+    //console.log(`我今天中午吃${ab}和${bi}`);
+
+    //函数的解构
+    {
+        function fn1(str1="我爱",str2="学习") {
+            return `${str1}${str2}`
+        }
+        console.log(fn1());
+    }
+</script>
+</body>
+</html>

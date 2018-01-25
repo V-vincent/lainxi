@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标切换效果</title>
+</head>
+<body>
+    <img src="img/jd1.png" alt="" id="qie">
+    <script>
+        var qie=document.getElementById("qie");
+        qie.onmouseover=function () {
+            qie.src="img/jd2.png"
+        };
+        qie.onmouseout=function () {
+            qie.src="img/jd1.png"
+        }
+    </script>
+</body>
+</html>

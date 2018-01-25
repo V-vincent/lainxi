@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录请求</title>
+</head>
+<body>
+<input type="text" id="text">
+<input type="button" value="登录" id="btn">
+
+<script>
+    var text=document.getElementById("text");
+    var btn=document.getElementById("btn");
+    btn.onclick=function () {
+        var re=/^[0-9]{4,10}\d$/;
+        if(re.test(text.value)){
+            alert("正确")
+        }
+        else {
+            alert("错误")
+        }
+    }
+</script>
+</body>
+</html>

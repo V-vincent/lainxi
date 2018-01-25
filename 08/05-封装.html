@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 2000px">
+<script>
+    function scroll() {
+        if(document.documentElement.scrollTop){
+            return{
+                top:document.documentElement.scrollTop,
+                left:document.documentElement.scrollLeft
+            }
+        }
+        else {
+            return{
+                top:document.body.scrollTop,
+                left:document.body.scrollLeft
+            }
+        }
+    }
+
+    window.onscroll=function () {
+       console.log(scroll().top)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <!--在任何设备内容 1:1去显示-->
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background: #ccc;
+        }
+        .box{
+            width: 640px;
+            overflow: hidden;
+            position: relative;
+        }
+        .box ul{
+            width: 1000px;
+            overflow: hidden;
+            position: relative;
+            background: #00A8FF;
+            transition: all 0.3s;
+        }
+        .box ul li{
+            float: left;
+            color: #fff;
+            line-height: 50px;
+            padding: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul style="transform:translateX(0px)">
+            <li>推荐</li>
+            <li>百家</li>
+            <li>本地</li>
+            <li>图片</li>
+            <li>娱乐</li>
+            <li>社会</li>
+            <li>军事</li>
+            <li>互联网</li>
+            <li>科技</li>
+        </ul>
+    </div>
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+        var oUl=box.children[0];
+        var aLi=oUl.children;
+
+        var oUlWidth=0;
+        for(var i=0;i<aLi.length;i++){
+            oUlWidth+=aLi[i].offsetWidth;
+        }
+        oUl.style.width=oUlWidth+10+"px";
+
+        var startX=0;
+        var startM=0;
+        var oulLeft=0;
+        document.addEventListener("touchstart",start,false) ;//注册手机按下事件
+        document.addEventListener("touchmove",startMove,false);//注册手机移动事件
+        document.addEventListener("touchend",touchend,false);//注册手机移动事件
+
+        function start(ev) {
+            startX=ev.touches[0].clientX;
+           /* oulLeft=oUl.offsetLeft;*/
+           oulLeft=oUl.style.transform;
+        }
+        function startMove(ev) {
+            startM=ev.touches[0].clientX;
+        /*    oUl.style.left=startM-startX+oulLeft+"px";*/
+            //导航条移动
+            oUl.style.transform= "translateX("+(startM - startX + parseFloat(oulLeft.substr(11)))+"px)";
+        }
+
+        function touchend() {
+            var endX =parseFloat(oUl.style.transform.substr(11)); //松开鼠标获取X值
+            var pageX = window.innerWidth; //屏幕的宽度
+
+            if(endX>0){
+                oUl.style.transform= "translateX("+0+"px)";
+            }
+            else if (endX <= pageX - oUlWidth ){ //手指移动的距离 <= 屏幕的宽度 - 导航的宽度
+                oUl.style.transform= "translateX("+(pageX - oUlWidth)+"px)";
+            }
+        }
+
+
+    </script>
+</body>
+</html>

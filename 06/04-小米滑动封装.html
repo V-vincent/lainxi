@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滑动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 512px;
+            height: 400px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid #ccc;
+        }
+        .box img{
+            position: relative;
+            top:0;
+        }
+        .box span{
+            width: 100%;
+            height: 50%;
+            background: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+
+        }
+        .box #down{
+            top: inherit;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="img/mi.png" alt="">
+        <span id="up"></span>
+        <span id="down"></span>
+    </div>
+    <script>
+        var all=document.querySelector(".box").children;
+        var H=all[0].offsetHeight-all[0].parentNode.offsetHeight;
+        var timer=null;
+
+        function fn1(speed) {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                if(speed<0){
+                    if(all[0].offsetTop<=-H){
+                        clearInterval(timer);
+                        return;
+                    }
+                }
+                else {
+                    if(all[0].offsetTop>=0){
+                        clearInterval(timer);
+                        return;
+                    }
+                }
+                all[0].style.top=all[0].offsetTop+speed+"px";
+            },30)
+        }
+
+        all[1].onmouseover=function () {
+            fn1(-5);
+        };
+        all[2].onmouseover=function () {
+           fn1(5);
+        };
+    </script>
+</body>
+</html>

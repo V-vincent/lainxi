@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.page{
+    margin: 50px auto;
+    text-align: center;
+}
+.page .button input{
+    width: 45px;
+    height: 30px;
+    background: forestgreen;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    line-height: 30px;
+}
+.page .box{
+    width: 200px;
+    height: 200px;
+    background: #049fbb;;
+    margin: auto;
+}

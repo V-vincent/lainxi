@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 800px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .box .head{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: #ccc;
+        }
+        .box .head li{
+            width: 16.6%;
+            float: left;
+        }
+        .box .content{
+            width: 100%;
+        }
+        .box .content .list{
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #ccc;
+        }
+        .box .content .list li{
+            width: 16.6%;
+            float: left;
+        }
+        .box .content .list li input{
+            font-size: 17px;
+        }
+        .box .content .list li.delete{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="head">
+        <li><input type="checkbox" id="checkA" data-check="全选"><span>全选</span></li>
+        <li>商品信息</li>
+        <li>单价</li>
+        <li>数量</li>
+        <li>金额</li>
+        <li>操作</li>
+    </ul>
+    <div class="content" id="content" >
+        <ul class="list">
+            <li><input type="checkbox"></li>
+            <li>商品1</li>
+            <li>25</li>
+            <li>
+                <input type="button" value="&nbsp;&nbsp;-&nbsp;&nbsp;" class="reduce">
+                <input type="text" style="width: 30px;" value="1" class="mes">
+                <input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" class="add">
+            </li>
+            <li>50</li>
+            <li class="delete">删除</li>
+        </ul>
+    </div>
+    <h2 id="sumA" style="text-align: right; color: red; margin: 30px;">总计：800元</h2>
+</div>
+</body>
+</html>
+<script>
+    function Cart(data) {
+
+    }
+    Cart.prototype={
+        //生成Html；
+        createHtml:function () {
+
+        },
+        //绑定Html；
+        bindHtml:function () {
+
+        },
+        //加加；
+        addSum:function () {
+
+        },
+        //减减；
+        reduceSum:function () {
+
+        },
+        //删除
+        cancel:function () {
+
+        },
+        //总计
+        total:function () {
+
+        },
+        //单选
+        radio:function () {
+
+        },
+        //全选
+        checkAll:function () {
+
+        },
+        //输入数量
+        inputSum:function () {
+
+        },
+        //绑定事件
+        bindEvent:function () {
+
+        }
+    };
+    data=[
+
+    ];
+    var obj=new Cart(data);
+    obj=bindEvent();
+</script>

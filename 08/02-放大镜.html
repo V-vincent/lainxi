@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 350px;
+            height: 350px;
+            margin: 150px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .small {
+            position: relative;
+        }
+        .box .small .bar{
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            opacity: 0.7;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+        .box .big{
+            width: 350px;
+            height: 350px;
+            border: 1px solid #ccc;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            overflow: hidden;
+            display: none;
+        }
+        .box .big img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+   <div class="box">
+       <div class="small">
+           <div class="bar"></div>
+           <img src="images/001.jpg" alt="">
+       </div>
+       <div class="big">
+           <img src="images/0001.jpg" alt="">
+       </div>
+   </div>
+   <script>
+       var box=document.querySelector(".box");
+       var small=document.querySelector(".box .small");
+       var bar=document.querySelector(".box .small .bar");
+       var big=document.querySelector(".box .big");
+       var bigImg=document.querySelector(".box .big img");
+
+       small.onmouseover=function () {
+           bar.style.display="block";
+           big.style.display="block";
+       } ;
+       small.onmouseout=function () {
+           bar.style.display="none";
+           big.style.display="none"
+       };
+       small.onmousemove=function (ev) {
+           var oEvent=ev||event;
+           var x=oEvent.clientX-box.offsetLeft;
+           var y=oEvent.clientY-box.offsetTop;
+
+           bar.style.left=x-bar.offsetWidth/2+"px";
+           bar.style.top=y-bar.offsetHeight/2+"px";
+
+           if(bar.offsetLeft<=0){
+               bar.style.left="0px";
+           }
+           else  if(bar.offsetLeft>box.offsetWidth-bar.offsetWidth){
+               bar.style.left=box.offsetWidth-bar.offsetWidth+"px";
+           }
+           if(bar.offsetTop<=0){
+               bar.style.top="0px";
+           }
+           else  if(bar.offsetTop>box.offsetHeight-bar.offsetHeight){
+               bar.style.top=box.offsetHeight-bar.offsetHeight+"px";
+           }
+           bigImg.style.left=box.offsetWidth/big.offsetWidth*-x+"px";
+           bigImg.style.top=box.offsetHeight/big.offsetHeight*-y+"px";
+       }
+
+   </script>
+</body>
+</html>

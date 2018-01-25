@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字缓冲</title>
+    <style>
+        #ull li{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            float: left;
+            list-style: none;
+            margin-left: 20px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<ul id="ull">
+</ul>
+
+<script>
+    var arr=[16,50,60,80,10,5,30,22];
+    var ull=document.getElementById("ull");
+    var speed=0;
+
+    for(var i=0; i<arr.length; i++){
+        var oLi=document.createElement("li"); //创了8次
+        oLi.innerHTML=0;
+        ull.appendChild(oLi);
+        buff(arr[i],oLi);
+    }
+
+    //缓冲运动
+    function buff(iTarget,obj){
+        //多物体运动
+        clearInterval(obj.timer);
+        obj.timer=setInterval(function(){
+            speed = (iTarget-parseFloat(obj.innerHTML)) / 10;
+            speed=speed>0 ? Math.ceil(speed) : Math.floor(speed);
+
+            obj.innerHTML=parseFloat(obj.innerHTML) + speed + "%";
+
+            if(speed == 0){
+                clearInterval(obj.timer)
+            }
+        },500)
+    }
+
+</script>
+</body>
+</html>

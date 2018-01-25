@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 500px;
+            height: 15px;
+            margin: 100px auto;
+            position: relative;
+        }
+        .box .gray{
+            width: 100%;
+            height: 100%;
+            background: #ccc;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box .blue{
+            width: 0px;
+            height: 100%;
+            background: dodgerblue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box .drag{
+            width: 15px;
+            height: 50px;
+            background: dodgerblue;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -22.5px;
+            cursor: pointer;
+        }
+        .text{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="gray"></div>
+        <div class="blue"></div>
+        <div class="drag"></div>
+    </div>
+    <p class="text">你走了0%的路！</p>
+    <script>
+        var gray=document.getElementsByClassName("gray")[0];
+        var blue=document.getElementsByClassName("blue")[0];
+        var drag=document.getElementsByClassName("drag")[0];
+        var text=document.getElementsByClassName("text")[0];
+
+        drag.onmousedown=function (ev) {
+            var oEvent=ev || event;
+            var that=this;
+            var x = oEvent.clientX - that.offsetLeft;
+            document.onmousemove=function (ev){
+                var oEvent=ev || event;
+                var moveX=oEvent.clientX-x;
+                that.style.left=moveX+"px";
+                blue.style.width=moveX+"px";
+                if(moveX<0){
+                    moveX=0;
+                    that.style.left=moveX+"px";
+                }
+                else if(moveX>gray.offsetWidth-that.offsetWidth){
+                    moveX=gray.offsetWidth;
+                    that.style.left=moveX+"px";
+                    blue.style.width=moveX+"px";
+                }
+                text.innerText="你走了"+parseInt(moveX/gray.offsetWidth*100)+"%的路！";
+                window.getSelection().empty();
+            };
+            document.onmouseup=function(){
+                document.onmousemove=null;
+            }
+        }
+    </script>
+</body>
+</html>

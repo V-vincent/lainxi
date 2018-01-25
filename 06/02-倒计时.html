@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+     <ul id="list">
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+     </ul>
+     <script>
+         var list=document.getElementById("list");
+         var now=list.children;
+         var arr=["2017/10/1 00:00","2017/10/2 4:00","2017/10/1 00:00","2017/10/1 00:00"];
+         for (var i=0;i<arr.length;i++){
+             auTo(arr[i],i);
+         }
+         function auTo(time,i) {
+             setInterval(function () {
+                 var startTime=new Date();
+                 var endTime=new Date(time);
+                 var m=(endTime.getTime()-startTime.getTime())/1000;//获取当前时间(从现在开始的毫秒数)--秒
+                 //获取天
+                 var d=parseInt(m/60/60/24);
+                 //获取小时
+                 var h=parseInt(m/60/60%24);
+                 //获取分
+                 var f=parseInt(m/60%60);
+                 //获取秒
+                 var s=parseInt(m%60);
+                 now[i].innerHTML="距离为祖国母亲庆生还有"+d+"天"+h+"小时"+f+"分"+s+"秒"
+             },1000);
+         }
+
+     </script>
+</body>
+</html>

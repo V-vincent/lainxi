@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问css属性</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" style="left:30px;width: 100px;height: 100px;"></div>
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+    /*    console.log("left:"+box.style.left);
+        console.log("height:"+box.style.height);
+        console.log("height:"+box.style['height']);
+        function fn(at,attr) {
+            console.log(at+":"+box.style[attr]);
+        }
+        fn("height","height");
+        fn("left","left");*/
+
+    function getStyle(obj,attr) {
+        if(obj.currentStyle){
+            //IE
+            return obj.currentStyle[attr];
+        }
+        else {
+            return window.getComputedStyle(obj,null)[attr]
+        }
+    }
+    console.log(getStyle(box,"top"));
+    console.log(getStyle(box,"right"))
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            background: url("img/clock.jpg");
+            background-size: cover;
+            position: relative;
+        }
+        .box>div{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+        .box>div:nth-child(1){
+            background: url("img/hour.png") no-repeat center;
+        }
+        .box>div:nth-child(2){
+            background: url("img/minute.png") no-repeat center;
+        }
+        .box>div:nth-child(3){
+            background: url("img/second.png") no-repeat center;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var all=document.querySelector(".box").children;
+            setInterval(function () {
+                var nowDate=new  Date();
+                var s=nowDate.getSeconds();
+                all[2].style.transform="rotate("+s*6+"deg)";
+                var m=nowDate.getMinutes();
+                all[1].style.transform="rotate("+m*6+"deg)";
+                var h=nowDate.getHours();
+                all[0].style.transform="rotate("+h*30+"deg)";
+            },1000)
+        }
+    </script>
+</head>
+<body>
+    <div class="box">
+        <div class="h"></div>
+        <div class="m"></div>
+        <div class="s"></div>
+    </div>
+</body>
+</html>

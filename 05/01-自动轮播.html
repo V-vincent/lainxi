@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            list-style: none;
+            margin: 0;
+            padding:0;
+        }
+        .box{
+            width: 500px;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+        .box .left{
+            width: 400px;
+            height: 240px;
+            border: 5px solid #ccc;
+            position: relative;
+            float: left;
+        }
+        .box .right{
+            float: left;
+            margin-left: 15px;
+        }
+        .box .left img{
+            width: 400px;
+        }
+        .box .left .pp{
+            height: 30px;
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            line-height: 30px;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+        }
+        .box .left .bottomText{
+            bottom: 0;
+            top:inherit;
+        }
+        .box .right li{
+            width: 40px;
+            height: 40px;
+            background: #cccccc;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 40px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .box .right li.cur{
+            background:gold;
+            color: #000000;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var box=document.getElementById("box");
+            var topText=box.querySelector(".topText");
+            var bottomText=box.querySelector(".bottomText");
+            var oImg=box.querySelector(".oimg");
+            var aBtn=box.querySelectorAll("ul li");
+            var num=0;
+            var timer=null;
+            var imgPath=["images/a1.jpg","images/a2.jpg","images/a3.jpg","images/a4.jpg"];
+            var textHtml=["这里是猴子!","这里是貂蝉!","这里是情侣!","这里是狄仁杰!"];
+
+            init();//初始化；
+            function  init() {
+                oImg.src=imgPath[num];
+                bottomText.innerHTML=textHtml[num];
+                topText.innerHTML=num+1+"/"+imgPath.length;
+            }
+            atuo();
+            function atuo() {
+                for(var i=0;i<aBtn.length;i++){
+                    aBtn[i].id=i;
+                    aBtn[i].onclick=function () {
+                        for(var i=0;i<aBtn.length;i++){
+                            aBtn[i].className="";
+                        }
+                        this.className="cur";
+                        num=Number(this.id);//核心代码
+                        init();
+                    }
+                }
+            }
+            autoPlay();
+            function autoPlay() {
+                clearInterval(timer);
+                timer=setInterval(function () {
+                    for(var i=0;i<aBtn.length;i++){
+                        aBtn[i].className="";
+                    }
+                    num=++num%4;
+/*                    num++;
+                    if(num>=aBtn.length){
+                        num=0;
+                    }*/
+                    aBtn[num].className="cur";
+                    init();
+                },2000);
+                box.onmouseover=function () {
+                    clearInterval(timer);
+                };
+                box.onmouseout=function () {
+                    autoPlay();
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+     <div class="box" id="box">
+         <div class="left">
+             <p class="pp topText"></p>
+             <img class="oimg" src="" alt="" >
+             <p class="pp bottomText"></p>
+         </div>
+         <ul class="right">
+             <li class="cur">1</li>
+             <li>2</li>
+             <li>3</li>
+             <li>4</li>
+         </ul>
+     </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>广告</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 150px;
+            height: 400px;
+            background: #08babb;
+            position: absolute;
+            top:50%;
+            left: 0;
+        }
+        p{
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body style="height: 3000px">
+    <div>
+        <div class="box"></div>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+        <p>我们的爱情刚刚好</p>
+    </div>
+    <script src="noTwo.js"></script>
+    <script>
+        var box=document.querySelector(".box");
+        var speed=5,iTarget=0,timer=null;
+
+        window.onscroll=function () {
+            iTarget=scroll().top+50;
+            buff();
+        };
+        function buff() {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                speed=(iTarget-box.offsetTop)/10;
+                speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                box.style.top=box.offsetTop+speed+"px";
+                if(!speed){
+                    clearInterval(timer);
+                }
+            },30)
+        }
+
+    </script>
+</body>
+</html>

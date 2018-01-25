@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>换肤</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: url("img/1.jpg");
+        }
+        ul{
+            text-align: center;
+            padding: 50px 0;
+            background: rgba(0,0,0,0.2);
+        }
+        ul li{
+            width: 160px;
+            height: 100px;
+            display: inline-block;
+        }
+        ul li img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body id="bd">
+    <ul>
+        <li><img src="img/1.jpg" id="tu01"></li>
+        <li><img src="img/2.jpg" id="tu02"></li>
+        <li><img src="img/3.jpg" id="tu03"></li>
+        <li><img src="img/4.jpg" id="tu04"></li>
+        <li><img src="img/5.jpg" id="tu05"></li>
+    </ul>
+    <script>
+        var tu01=document.getElementById("tu01")
+        var tu02=document.getElementById("tu02")
+        var tu03=document.getElementById("tu03")
+        var tu04=document.getElementById("tu04")
+        var tu05=document.getElementById("tu05")
+        var bd=document.getElementById("bd")
+
+        tu01.onclick=function () {
+            bd.style.background= 'url("img/1.jpg")'
+        }
+        tu02.onclick=function () {
+            bd.style.background= 'url("img/2.jpg")'
+        }
+        tu03.onclick=function () {
+            bd.style.background= 'url("img/3.jpg")'
+        }
+        tu04.onclick=function () {
+            bd.style.background= 'url("img/4.jpg")'
+        }
+        tu05.onclick=function () {
+            bd.style.background= 'url("img/5.jpg")'
+        }
+    </script>
+</body>
+</html>

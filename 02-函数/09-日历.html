@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日历</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+        .box{
+            width: 300px;
+            background: #ccc;
+            margin: 50px auto;
+            padding: 15px 15px;
+        }
+        ul{
+            overflow: hidden;
+        }
+        ul li{
+            width: 75px;
+            height: 75px;
+            border: 1px solid #ffffff;
+            float: left;
+            margin-left: 18px;
+            margin-top: 15px;
+            text-align: center;
+            line-height: 75px;
+        }
+        ul li.cur{
+            border: 1px solid yellow;
+        }
+        .box .foot{
+            margin-left: 18px;
+            margin-top: 18px;
+        }
+        h3{
+            font-weight: normal;
+        }
+        p{
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li class="cur"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="foot">
+        </div>
+    </div>
+    <div class="box">
+        <ul>
+            <li class="cur"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="foot">
+        </div>
+    </div>
+    <script>
+        var box=document.getElementsByClassName("box");
+        for(var i=0;i<box.length;i++){
+            tab(box[i]);
+        }
+        function tab(content) {
+            var num=0;
+            var aLi=content.querySelectorAll(".box ul li");
+            var foot=content.querySelector(".box .foot");
+            var bb=["我爱学习","学习使我快乐","我爱编程","编程使我快乐","好开心啊！","好幸福啊！",
+                "好兴奋啊！","学习使我快乐","我爱学习","学习使我快乐","我爱学习","学习使我快乐"];
+            foot.innerHTML="<h3>现在是"+1+"月</h3>"+"<p>"+bb[0]+"</p>";
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].innerHTML=1+i+"月";
+                aLi[i].index=i;
+                aLi[i].onclick=function () {
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].className="";
+                    }
+                    this.className="cur";
+                    foot.innerHTML="<h3>现在是"+(Number(this.index)+1)+"月</h3>"+"<p>"+bb[this.index]+"</p>";
+                    num=this.index;
+                }
+            }
+            setInterval(function () {
+                for(var i=0;i<aLi.length;i++) {
+                    aLi[i].className = "";
+                };
+                num++;
+                if (num >= aLi.length) {
+                    num = 0;
+                }
+                aLi[num].className = "cur";
+                foot.innerHTML="<h3>现在是"+(Number(num)+1)+"月</h3>"+"<p>"+bb[num]+"</p>";
+            },2000)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>换肤属性</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            background: #049fbb;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="还原" id="bt01">
+    <input type="button" value="变宽" id="bt02">
+    <input type="button" value="变高" id="bt03">
+    <input type="button" value="变色" id="bt04">
+    <div class="box" id="box"></div>
+
+    <script>
+        var bt01=document.getElementById("bt01");
+        var bt02=document.getElementById("bt02");
+        var bt03=document.getElementById("bt03");
+        var bt04=document.getElementById("bt04");
+        var box=document.getElementById("box");
+        bt01.onclick=function () {
+            var off=confirm("确定还原吗？")
+            if (off==false){
+                return;
+            }
+            box.style="box";
+        }
+        bt02.onclick=function () {
+            box.style.width="400px";
+        }
+        bt03.onclick=function () {
+            box.style.height="400px";
+        }
+        bt04.onclick=function () {
+            box.style.background="red";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 1000px;
+            margin: 50px auto;
+        }
+        .box .head{
+            width: 100%;
+            height: 60px;
+            background: #ccc;
+        }
+        .box .head li{
+            float: left;
+            width: 16.6%;
+            text-align: center;
+            line-height: 60px;
+            color: #151515;
+        }
+        .box .list{
+            height: 60px;
+            border-bottom: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .box .list li{
+            float: left;
+            width: 16.6%;
+            text-align: center;
+            line-height: 60px;
+        }
+        .box .list li input{
+            font-size: 18px
+        }
+        .box .list li.delete{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="head">
+            <li><input type="checkbox" id="checkA" data-check="全选"><span>全选</span></li>
+            <li>商品信息</li>
+            <li>单价</li>
+            <li>数量</li>
+            <li>金额</li>
+            <li>操作</li>
+        </ul>
+        <div class="content" id="content" >
+            <!--<ul class="list">
+                <li><input type="checkbox"></li>
+                <li>商品1</li>
+                <li>25</li>
+                <li>
+                    <input type="button" value="&nbsp;&nbsp;-&nbsp;&nbsp;" class="reduce">
+                    <input type="text" style="width: 30px;" value="1">
+                    <input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" class="add">
+                </li>
+                <li>50</li>
+                <li>删除</li>
+            </ul>-->
+        </div>
+        <h2 id="sumA" style="text-align: right; color: red; margin: 30px;">总计：800元</h2>
+    </div>
+    <script>
+        function Cart(data) {
+            this.data=data;
+            this.content=document.getElementById("content");
+            this.add=document.getElementsByClassName("add");//加加
+            this.reduce=document.getElementsByClassName("reduce");//减减
+            this.sumA=document.getElementById("sumA");//总价
+            this.single=document.getElementsByClassName("single");//单选
+            this.checkA=document.getElementById("checkA");//全选
+            this.delete=document.getElementsByClassName("delete");//删除
+        }
+        Cart.prototype={
+            //生成Html
+            createHtml:function (data,index) {
+                var str="";
+                str+='<ul class="list"  data-index='+index+'>';
+                str+='<li><input type="checkbox" class="single" '+(data[index].complate ? "checked":"")+'></li>';
+                str+='<li>'+data[index].name+'</li>';
+                str+='<li>'+data[index].price+'</li>';
+                str+='<li>';
+                str+='<input type="button" value="&nbsp;&nbsp;-&nbsp;&nbsp;" class="reduce">';
+                str+='<input type="text" style="width: 30px;" value="'+data[index].num+'">';
+                str+='<input type="button" value="&nbsp;&nbsp;+&nbsp;&nbsp;" class="add">';
+                str+='</li>';
+                str+='<li>'+data[index].price*data[index].num+'</li>';
+                str+='<li class="delete">删除</li>';
+                str+='</ul>';
+                return str;
+            },
+            //绑定Html
+            bindHtml:function () {
+                var str="";
+                var priceNum=0;//总价格  每次都要清空
+                for(var i=0; i<this.data.length; i++) {
+                    str += this.createHtml(this.data, i);
+                    if(this.data[i].complate){  //是true
+                        priceNum+=this.data[i].price*this.data[i].num; //总价
+                    }
+                }
+                this.content.innerHTML=str;
+                this.addSum();//加加
+                this.reduceSum();//减减
+                this.sumAll(priceNum);//总价
+                this.choice();//单选
+                this.deleteL();//删除
+                this.checkAll();//全选
+            },
+            //加加
+            addSum:function () {
+                var that=this;
+                for(var i=0;i<this.add.length;i++){
+                    this.add[i].onclick=function () {
+                        var index=this.parentNode.parentNode.getAttribute("data-index");
+                        that.data[index].num++;
+                        that.bindHtml();
+                    }
+                }
+            },
+            //减减
+            reduceSum:function () {
+                var that=this;
+                for(var i=0;i<this.reduce.length;i++){
+                    this.reduce[i].onclick=function () {
+                        var index=this.parentNode.parentNode.getAttribute("data-index");
+                        if(that.data[index].num<=1) return;
+                        that.data[index].num--;
+                        that.bindHtml();
+                    }
+                }
+            },
+            //总计
+            sumAll:function (priceNum) {
+                this.sumA.innerHTML="总计："+priceNum+"元";
+            },
+            //单选
+            choice:function () {
+                var that=this;
+                for (var i=0;i<this.single.length;i++){
+                    this.single[i].onclick=function () {
+                        var index=this.parentNode.parentNode.getAttribute("data-index");
+                        that.data[index].complate=!that.data[index].complate;
+                        var off=true;
+                        for(var i=0;i<that.data.length;i++){
+                            if(that.data[i].complate==false){
+                                off=false;
+                            }
+                        }
+                        //console.log(off);
+                        if(off){
+                            that.checkA.checked=true;
+                            that.checkA.setAttribute("data-check","不选");
+                        }
+                        else {
+                            that.checkA.checked=false;
+                            that.checkA.setAttribute("data-check","全选");
+                        }
+                        that.bindHtml();
+                    };
+                }
+            },
+            //全选
+            checkAll:function () {
+                var that=this;
+                this.checkA.onclick=function () {
+                    var off=this.getAttribute("data-check");
+                    //console.log( off);
+                    for(var i=0;i<that.data.length;i++){
+                        if(off=="全选"){
+                            //that.checkA.checked=false;
+                            that.data[i].complate=true;
+                            that.checkA.setAttribute("data-check","不选");
+                        }
+                        else {
+                            //that.checkA.checked=true;
+                            that.data[i].complate=false;
+                            that.checkA.setAttribute("data-check","全选");
+                        }
+                    }
+                    that.bindHtml();
+                }
+            },
+            //删除
+            deleteL:function () {
+                var that=this;
+                for(var i=0;i<this.data.length;i++){
+                    this.delete[i].onclick=function () {
+                        var index=this.parentNode.getAttribute("data-index");
+                        that.data.splice(index,1);
+
+                        var off=true;
+                        for(var i=0;i<that.data.length;i++){
+                            if(that.data[i].complate==false){
+                                off=false;
+                            }
+                        }
+                        //console.log(off);
+                        if(off){
+                            that.checkA.checked=true;
+                            that.checkA.setAttribute("data-check","不选");
+                        }
+                        else {
+                            that.checkA.checked=false;
+                            that.checkA.setAttribute("data-check","全选");
+                        }
+                        that.bindHtml();
+                    };
+                }
+            }
+            //改变数量
+        };
+        var data=[
+            {name:"商品1",price:55,num:1,complate:false},
+            {name:"商品2",price:88,num:2,complate:true},
+            {name:"商品3",price:200,num:1,complate:false}
+        ];
+        var obj=new Cart(data);
+        obj.bindHtml();
+
+        //到后台把数据请求回来
+        //生成Html
+        //什么是json字符串 什么是json对象
+        //存 localStorage.setItem("cart",JSON.stringify(a))
+        //取 JSON.parse(localStorage.getItem("cart"))
+    </script>
+</body>
+</html>

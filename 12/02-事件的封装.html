@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件的封装</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: relative;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="右走" id="btn1">
+<input type="button" value="左走" id="btn2">
+<div class="box" id="box"></div>
+<script>
+    btn1=document.getElementById("btn1");
+    btn2=document.getElementById("btn2");
+    box=document.getElementById("box");
+    function move(speed) {
+        return function () {
+            box.style.left=box.offsetLeft+speed+"px";
+        }
+    }
+    btn1.onclick=move(5);
+    btn2.onclick=move(-5);
+
+    /*btn1.onclick=function () {
+        move(5);
+    };
+    btn2.onclick=function () {
+        move(-5);
+    };
+    function move(speed) {
+        box.style.left=box.offsetLeft+speed+"px";
+    }*/
+</script>
+</body>
+</html>

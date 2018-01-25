@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装运动框架基本函数(多个属性)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            margin: 10px;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            border-radius: 50%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn01">变变</button>
+    <button id="btn02">再变</button>
+    <div id="box"></div>
+    <script>
+        var btn01=document.getElementById("btn01");
+        var btn02=document.getElementById("btn02");
+        var box=document.getElementById("box");
+        var speed=0;
+
+        btn01.onclick=function () {
+            animate(box,{width:200,height:200,left:1000},function () {
+                animate(box,{width:150,height:150,left:1000,top:400})
+            })
+        };
+        btn02.onclick=function () {
+            animate(box,{top:50})
+        };
+        function animate(obj,json,fn) {
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function () {
+                var flag=true;
+                for(var attr in json){
+                    var current=parseFloat(getStyle(obj,attr));
+                    speed=(json[attr]-current)/10;
+                    speed=speed>0 ? Math.ceil(speed) :Math.floor(speed);
+                    obj.style[attr]=current+speed+"px";
+                    if(json[attr] != current){
+                        flag=false;
+                    }
+                }
+               if(flag){
+                   clearInterval(obj.timer);
+                   //console.log(66666);
+                   if(fn){
+                       fn();
+                   }
+               }
+               /* if(speed==0){
+                    clearInterval(obj.timer);
+                }*/
+            },30)
+        }
+
+        function getStyle(obj,attr) {
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }
+            else {
+                return window.getComputedStyle(obj,null)[attr];
+            }
+        }
+    </script>
+</body>
+</html>

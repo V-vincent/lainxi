@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>窗口改变事件</title>
+    <style>
+        body{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <script src="noTwo.js"></script>
+    <script>
+        window.onresize=function () {
+            if (getWidth().width>640){
+                document.body.style.background="red";
+            }
+            else {
+                document.body.style.background="blue";
+            }
+        }
+    </script>
+</body>
+</html>

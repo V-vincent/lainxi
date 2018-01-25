@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回顶部</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 150px;
+            height: 200px;
+            background: #08babb;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body style="height: 3000px">
+    <div class="box" onclick="buff()"></div>
+    <script src="noTwo.js"></script>
+    <script>
+        var box=document.getElementsByClassName("box")[0];
+        var timer=null,speed=0,iTarget=0,scrollTop=0;
+        //大于0 显示
+        window.onscroll=function () {
+            scroll().top >2 ? show(box):hide(box);
+            scrollTop=scroll().top;
+        };
+        //缓冲运动
+        function buff(){
+            clearInterval(timer);
+            timer=setInterval(function(){
+                speed = (iTarget-scrollTop) / 10;
+                speed=speed>0 ? Math.ceil(speed) : Math.floor(speed);
+                //整个文档移动 x，y
+                scrollTo(0,scrollTop+speed);
+                if(speed == 0){
+                    clearInterval(timer)
+                }
+            },30)
+        }
+    </script>
+</body>
+</html>

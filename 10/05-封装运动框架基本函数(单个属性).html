@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>封装运动框架基本函数(单个属性)</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            margin-left: 10px;
+            position: relative;
+        }
+        .btn{
+            width: 40px;
+            height: 26px;
+            margin: 15px 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="600" class="btn">
+    <input type="button" value="800" class="btn">
+    <div class="box"></div>
+    <script>
+        var btn600=document.getElementsByClassName("btn")[0];
+        var btn800=document.getElementsByClassName("btn")[1];
+        var box=document.getElementsByClassName("box")[0];
+        var timer=null,speed=0;
+        
+        btn600.onclick=function () {
+            animate(600,box,"width");
+        };
+        btn800.onclick=function () {
+            animate(800,box,'left');
+        };
+
+        function animate(iTarget,obj,attr) {
+            clearInterval(timer);
+            timer=setInterval(function () {
+                var current=parseFloat(getStyle(obj,attr));
+                speed=(iTarget-current)/10;
+                speed=speed>0 ? Math.ceil(speed) : Math.floor(speed);
+                obj.style[attr]=current+speed+"px";
+                if(!speed){
+                    clearInterval(timer);
+                }
+            },30)
+        }
+
+        function getStyle(obj,attr) {
+            if(obj.currentStyle){
+                return obj.currentStyle[attr];
+            }
+            else {
+                return window.getComputedStyle(obj,null)[attr];
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box > div{
+            width:200px;
+            height:200px;
+            background: #ccc;
+            display: none;
+        }
+        .box input.cur{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="box">
+        <input class="cur" type="button" value="头条">
+        <input type="button" value="八卦">
+        <input type="button" value="看天下">
+        <input type="button" value="社会">
+
+        <div style="display: block">
+            咚!很响一声后 这名女生过世了给驴贴罚单?交警做出如下回应•所有人注意!身份证将迎来大变革•这个镇政府的食堂 竟惊动中纪委•他是唯一特批有两张身份证的人
+        </div>
+        <div>
+            尴尬!网爆文章和冯小刚握手被拒不怕长胖!林志玲大口吃肥肉
+            •薛之谦自曝曾被李雨桐父母施暴•这些照片马蓉和她妈妈最想删除•张翰机场帮小孩 却因这个遭痛斥•第二个宝强:被转移财产暴瘦65斤
+        </div>
+        <div>
+            薛之谦自曝曾被李雨桐父母施暴•这些照片马蓉和她妈妈最想删除•张翰机场帮小孩 却因这个遭痛斥2323213213
+        </div>
+        <div>
+            林心如躺裸男怀中作风大胆！美爆了！宋茜跳芭蕾力求完美劲爆！薛之谦与李雨桐父母打架马蓉骂赵丽颖：和我比你是垃圾张馨予晒罂粟花疑暗讽范冰冰？罗志祥男友力爆棚给小女友梳
+        </div>
+    </div>
+    <script>
+        var oBox=document.getElementById("box");
+        var aBtn=oBox.getElementsByTagName("input");
+        var aDiv=oBox.getElementsByTagName("div");
+        var timer=null;
+
+        //给所的的按钮加上点击事件
+        for(var i=0; i<aBtn.length; i++){
+            aBtn[i].onmouseover=function(num){
+                //谁发生事件，谁就是this
+                //alert(this.value)
+
+                return function(){
+                    clearTimeout(timer)
+                    timer=setTimeout(function(){
+
+                        for(var i=0; i<aBtn.length; i++){
+                            aBtn[i].className="";
+                            aDiv[i].style.display='none';
+                        }
+                        aBtn[num].className="cur";
+                        aDiv[num].style.display='block';
+
+                    },300)
+                }
+            }(i)
+        }
+    </script>
+</body>
+</html>

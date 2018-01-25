@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>比较宽度大小</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            background: #08babb;
+            margin: 100px auto;
+            padding: 20px;
+            border: 15px solid #00c7ff;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+        这里是内容
+    </div>
+    <script>
+        var div = document.getElementsByTagName("div")[0];
+        console.log("offsetWidth:" + div.offsetHeight);  //  width  +  padding  +  border
+        console.log("clientWidth:" +div.clientHeight);   // width  +  padding 不包含border
+        console.log("scrollWidth:" +div.scrollHeight);  //大小是内容的大小
+    </script>
+</body>
+</html>

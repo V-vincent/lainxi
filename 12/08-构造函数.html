@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //只有属性，没有方法
+        //this 三种情况，1.点击哪个按钮，this就是哪个按钮
+        //2.一般指向window
+        //3.如果是对象里的方法 里面的this  指向对像本身
+        //4. new  让this重新指向
+
+        function Fn1(a,b){
+            this.a=a;
+            this.b=b;
+            //每个对像上面都一个prototype 属性  来实现继承
+        }
+
+        Fn1.prototype.show=function(){
+            alert(this.a)
+        };
+
+        var obj=new Fn1("111","22"); //把函数变成 对像    让this重新指向 Fn1
+        obj.show();
+        console.log(obj)
+
+    </script>
+</body>
+</html>

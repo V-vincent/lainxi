@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+
+    <script>
+
+        var arr = [ '100px', 'abc'-6, [], -98765, 34, -2, 0, '300', , function(){alert(1);}, null, document, [],
+            true,'200px'-30,'23.45元', 5, Number('abc'), function(){ alert(3); }, 'xyz'-90 ];
+        /*1、找到arr里所有的数字
+         找到arr里所有的字符串
+         2、找到可以转成数字的
+         3、把转成数字以后，最大值判断出来
+         4、把 NaN 所在的位置找出来
+         5.找出undifind的位置*/
+
+        document.write("找到arr里所有的数字:");
+        for(var i=0; i<arr.length; i++){  //isNaN不是数字      是数字类型
+            if(!isNaN(arr[i])){
+                if (typeof arr[i]  == "number") {
+                    document.write(arr[i]+",");
+                }
+            }
+        }
+        document.write("<br><br>"+"找到arr里所有的字符串:");
+        for(var i=0; i<arr.length; i++){  //isNaN不是数字      是数字类型
+            if (typeof arr[i]  == "string") {
+                document.write(arr[i]+",");
+            }
+        }
+        document.write("<br><br>"+"找到可以转成数字的:");
+        for(var i=0; i<arr.length; i++){  //isNaN不是数字      是数字类型
+            if (Number(arr[i])|| Number(arr[i])==0) {
+                document.write(arr[i]+",");
+            }
+        }
+        document.write("<br><br>"+"把 NaN 所在的位置找出来:");
+        for(var i=0; i<arr.length; i++){  //isNaN不是数字      是数字类型
+            if(isNaN(arr[i])){
+                if (typeof arr[i]  == "number") {
+                    document.write(i+",");
+                }
+            }
+        }
+        document.write("<br><br>"+"找出undefined的位置:");
+        for(var i=0; i<arr.length; i++){  //isNaN不是数字      是数字类型
+            if (typeof arr[i]  == "undefined") {
+                document.write(i+",");
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

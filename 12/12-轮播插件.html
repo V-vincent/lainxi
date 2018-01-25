@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 540px;
+            height: 300px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin: 50px auto 20px;
+        }
+        .box .inner{
+            width: 520px;
+            height: 280px;
+            margin: 10px auto;
+            overflow: hidden;
+            position:relative;
+        }
+        .box .inner ul{
+            width:1000%;
+            position: relative;
+        }
+        .box .inner ul li{
+            width: 10%;
+            float: left;
+        }
+        ol{
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            margin-left: -80px;
+        }
+        ol li{
+            float: left;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            background-color: #049fbb;
+            margin-left: 15px;
+            text-align: center;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        ol li.cur{
+            background: red;
+        }
+        .ctr{
+            width: 105px;
+            margin: auto;
+        }
+        .ctr a{
+            text-decoration:none;
+        }
+    </style>
+</head>
+<body>
+   <div class="box" id="slider">
+       <div class="inner" >
+           <ul>
+           </ul>
+           <!--<ol>
+               <li class="cur">1</li>
+               <li>2</li>
+               <li>3</li>
+               <li>4</li>
+           </ol>-->
+       </div>
+   </div>
+   <div class="ctr">
+       <a href="javascript:;" id="last" >上一张</a>
+       <a href="javascript:;" id="next" >下一张</a>
+   </div>
+</body>
+</html>
+<script>
+    function Slider(obj) {
+        //写一些属性
+        this.imgPath=obj.imgPath;
+        this.obj=obj;
+        this.slider=document.getElementById("slider");
+        this.inner=this.slider.querySelector(".inner");
+        this.oUl=this.slider.querySelector(".inner ul");
+        this.oli=document.querySelectorAll("ol li");
+        this.btnNext=document.querySelector("#next");
+        this.btnLast=document.querySelector("#last");
+        this.key=0;
+    }
+    Slider.prototype={
+        //自动生成Html
+        createHtml:function () {
+            var str="";
+            for(var i=0;i<this.imgPath.length;i++){
+                str+='<li><img src='+this.imgPath[i]+'></li>';
+            }
+            this.oUl.innerHTML=str;//插入图片
+        },
+        //下一张
+        next:function () {
+            var that=this;
+            that.key++;
+            that.key=that.key>=that.imgPath.length? 0:that.key;
+            var iTarget=-that.oUl.parentNode.clientWidth*that.key;
+            that.buff(iTarget);
+            that.current();
+        },
+        //下一张事件
+        nextEv:function () {
+            var that=this;
+            this.btnNext.onclick=function(){
+                that.next();
+            }
+        },
+        //上一张
+        last:function () {
+            var that=this;
+            this.btnLast.onclick=function(){
+                that.key--;
+                that.key=that.key<0? 3:that.key;
+                var iTarget=-that.oUl.parentNode.clientWidth*that.key;
+                that.buff(iTarget);
+                that.current();
+            }
+        },
+        //自动轮播
+        autoPlay:function(){
+            clearInterval(this.slider.timer);
+            var that=this;
+            this.slider.timer=setInterval(function () {
+                that.next();
+            },this.obj.CarouseTime)
+        },
+        //生成小圆点
+        createCurrent:function () {
+            var Ol=document.createElement("ol");
+            this.inner.appendChild(Ol);
+            for(var i=0;i<this.imgPath.length;i++){
+                var oli=document.createElement("li");
+                oli.innerText=i+1;
+                Ol.appendChild(oli);
+            }
+            Ol.children[0].className="cur";
+        },
+        //小圆点
+        current:function () {
+            var oliBtn=document.querySelectorAll(".inner ol li");
+            for(var i=0;i<oliBtn.length;i++){
+                oliBtn[i].className="";
+            }
+            //核心代码
+            oliBtn[this.key].className="cur";
+        },
+        //点击小圆点
+        clickCurrent:function () {
+            var curBtn=this.slider.querySelectorAll("ol li");
+            var that=this;
+            for(var i=0;i<curBtn.length;i++){
+                curBtn[i].onclick=function (num) {
+                    return function () {
+                        that.key=num;//核心代码
+                        var iTarget=-that.oUl.parentNode.clientWidth*that.key;
+                        that.buff(iTarget);
+                        that.current();
+                    }
+                }(i)
+            }
+        },
+        //buff
+        buff:function (iTarget) {
+            clearInterval(this.slider.timer1);
+            var speed=0;
+            var that=this;
+            this.slider.timer1=setInterval(function () {
+                speed=(iTarget-that.oUl.offsetLeft)/10;
+                speed=speed>0? Math.ceil(speed):Math.floor(speed);
+                that.oUl.style.left=that.oUl.offsetLeft+speed+"px";
+                if(speed==0)  clearInterval(this.slider.timer1);
+            },30)
+        },
+        //绑定事件
+        bindEvent:function () {
+            this.createHtml();  //自动生成Html
+            this.createCurrent(); //生成小圆点
+            this.clickCurrent();//点击小圆点
+            //this.next(); //下一张
+            this.nextEv();//下一张事件
+            this.last(); //上一张
+            if(this.obj.autoPlay){
+                this.autoPlay();//自动轮播
+            }
+        }
+    };
+    var obj1=new Slider({
+        imgPath:["images/01.jpg","images/02.jpg","images/03.jpg","images/05.jpg"],
+        CarouseTime:2000,
+        autoPlay:true
+    });
+    obj1.bindEvent();
+    //用户可认自定义  图片的个数，是否轮播，是否显示小原点,是否显示下一张和上一张
+
+</script>

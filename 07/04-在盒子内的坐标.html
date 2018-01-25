@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 250px;
+            height: 250px;
+            background: pink;
+            margin: 100px auto;
+        }
+    </style>
+
+</head>
+<body>
+   <div class="box" id="box"></div>
+<script>
+    var demo=document.getElementById("box");
+    demo.onmousemove=function (ev) {
+        var oEvent=ev||event;
+        var x=oEvent.clientX-this.offsetLeft;
+        var y=oEvent.clientX-this.offsetTop;
+
+        this.innerHTML=x+"px"+","+y+"px"
+    };
+    /*document.onclick=function (ev) {
+        var oEvent=ev;
+        console.log(oEvent .clientX);
+    }*/
+</script>
+</body>
+</html>

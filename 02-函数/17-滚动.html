@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 900px;
+            height: 200px;
+            margin: 150px auto 30px;
+            position: relative;
+            border: 1px solid blue;
+            overflow: hidden;
+        }
+        ul{
+            overflow: hidden;
+            width: 1800px;
+            position: absolute;
+        }
+        ul li{
+            float: left;
+        }
+        .page .list{
+            text-align: center;
+            overflow: hidden;
+        }
+        .page .list a{
+            width: 50px;
+            height: 30px;
+            background: #ccc;
+            display: inline-block;
+            line-height: 30px;
+            text-decoration: none;
+            color: #ffffff;
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var oUl=document.querySelector(".box ul");
+            var speed=3;
+            var timer=null;
+            var list = document.querySelector(".list");
+            var aArr = list.children;
+            aArr[0].onclick = function () {
+                if(speed > 0) {
+                    speed+=2;
+                }
+                else {
+                    speed --;
+                }
+            };
+            aArr[1].onclick = function () {
+                if(speed >= 0) {
+                    speed--;
+                    if(speed < 0) {
+                        speed = 0;
+                    }
+                }
+                else {
+                    speed++;
+                }
+            };
+            aArr[2].onclick = function () {
+                speed = -3;
+            };
+            aArr[3].onclick = function () {
+                speed = 3;
+            };
+            oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+            clearInterval(timer);
+            timer=setInterval(function () {
+                if(oUl.offsetLeft>=0){
+                    oUl.style.left="-900px";
+                }
+                else if(oUl.offsetLeft <= -900){
+                    oUl.style.left= 0;
+                }
+                oUl.style.left=oUl.offsetLeft+speed+"px";
+            },30);
+        }
+    </script>
+</head>
+<body>
+    <div class="page">
+        <div class="box">
+            <ul>
+                <li><img src="imges/01.jpg" alt=""></li>
+                <li><img src="imges/02.jpg" alt=""></li>
+                <li><img src="imges/03.jpg" alt=""></li>
+            </ul>
+        </div>
+        <div class="list">
+            <a href="#" >加速</a>
+            <a href="#" >减速</a>
+            <a href="#" >向左</a>
+            <a href="#" >向右</a>
+        </div>
+    </div>
+</body>
+</html>
